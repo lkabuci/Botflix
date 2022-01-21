@@ -1,6 +1,17 @@
+'''
+features to be added:
+    the ability to sort items
+    load in the second page
+    Enter size value
+    like grep command
+'''
+
+
 import requests
 from bs4 import BeautifulSoup
-import pandas
+from prettytable import PrettyTable
+import pyperclip
+
 
 def get_titles():
     title = []
@@ -28,6 +39,7 @@ def get_magnet_links():
             magnet.append(link)
     return magnet
 
+
 search = input("What are you searching for? ").split(" ")
 search = "+".join(search)
 
@@ -43,18 +55,40 @@ magnets = soup.find_all("a")
 
 size = [ item.text for item in sizes ]
 
-
 title = get_titles()
-
-
-
 magnet = get_magnet_links()
 
 data = {
     "Title": title,
     "size": size,
-    "Link": magnet
 }
 
-df = pandas.DataFrame(data)
+
+df = PrettyTable()
+# df = pandas.DataFrame(data)
+
+number = [item for item in range(len(size))]
+
+df.add_column("Number", number)
+df.add_column("Title", title)
+df.add_column("Size", size)
 print(df)
+
+def selection(magnet):
+
+    lenght = [item for item in range(len(magnet))]
+    is_invalid = True
+    
+    # while is_invalid:
+    #     number = input("Enter Your Choice: ")
+    #     if number in lenght:
+    #         is_invalid = False
+    #     else:
+    #         print("Please enter a valid choice")
+    
+    number = int(input("Enter Your Choice: "))
+    
+    return magnet[number]
+
+pyperclip.copy(selection(magnet))
+spam = pyperclip.paste()
