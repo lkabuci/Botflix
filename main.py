@@ -65,12 +65,12 @@ data = {
 
 
 df = PrettyTable()
-# df = pandas.DataFrame(data)
 
 number = [item for item in range(len(size))]
 
 df.add_column("Number", number)
 df.add_column("Title", title)
+df.align["Title"] = "l"
 df.add_column("Size", size)
 print(df)
 
