@@ -10,7 +10,7 @@ features to be added:
 import requests
 from bs4 import BeautifulSoup
 from prettytable import PrettyTable
-import pyperclip
+import subprocess
 
 
 def get_titles():
@@ -30,6 +30,7 @@ def get_titles():
                 title.append(i)
     return title
 
+
 def get_magnet_links():
     '''this function search for the magnet links'''
     magnet = []
@@ -38,6 +39,7 @@ def get_magnet_links():
         if "magnet" in str(link):
             magnet.append(link)
     return magnet
+
 
 
 search = input("What are you searching for? ").split(" ")
@@ -78,17 +80,23 @@ def selection(magnet):
 
     lenght = [item for item in range(len(magnet))]
     is_invalid = True
-    
-    # while is_invalid:
-    #     number = input("Enter Your Choice: ")
-    #     if number in lenght:
-    #         is_invalid = False
-    #     else:
-    #         print("Please enter a valid choice")
+    # TODO: add a check if the number is valid or not
     
     number = int(input("Enter Your Choice: "))
     
     return magnet[number]
 
-pyperclip.copy(selection(magnet))
-spam = pyperclip.paste()
+def stream(magnet):
+    # TODO: add the ability to check if a vlc or other video player exist
+    # supported player
+    # DNLA
+    # MPlayer
+    # MPV
+    # OMX
+    # VLC
+    # IINA
+    # SMPlayer
+    # XBMC 
+    subprocess.run(["webtorrent", magnet, "--mpv"])
+
+stream(selection(magnet))
