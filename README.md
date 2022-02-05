@@ -1,5 +1,5 @@
 <h1 align="center"><u>Stram-Cli</u></h1>
-####Stream-Cli application that allow you to play your favorite movies from the terminal.
+<h4 align="center"> Stream-Cli application that allow you to play your favorite movies from the terminal.</h4>
 
 ## Installation:
 * First let's install nodejs and npm in the machine.
@@ -29,8 +29,8 @@
 `sudo chmod +x ~/.stream-cli/stream-cli`
 
 * Add an alias to your `~/.bashrc` or `~/.zshrc`
-bash : `echo "alias stream-cli='~/.stream-cli/stream-cli'" >> ~/.bashrc`
-zsh: `echo "alias stream-cli='~/.stream-cli/stream-cli'" >> ~/.zshrc`
+	* bash : `echo "alias stream-cli='~/.stream-cli/stream-cli'" >> ~/.bashrc`
+	* zsh: `echo "alias stream-cli='~/.stream-cli/stream-cli'" >> ~/.zshrc`
 
 ## How it works:
 * Run from the command line `stream-cli`
