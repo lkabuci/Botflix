@@ -46,8 +46,11 @@ search = input("What are you searching for? ").split(" ")
 search = "+".join(search)
 
 url = f"https://torrentgalaxy.to/torrents.php?search={search}&sort=size&order=desc"
-response = requests.get(url).text
-
+try:
+    response = requests.get(url).text
+except requests.exceptions.RequestException:
+    print(f"\033[91mUnable to connect to torrent provider. Please use vpn. Exiting...\033[0m")
+    raise SystemExit(0)
 soup = BeautifulSoup(response, 'html.parser')
 
 titles = soup.find_all("b", class_="txdark")
