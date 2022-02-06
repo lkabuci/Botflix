@@ -21,12 +21,9 @@ def choose_player():
         player = input("What is your default media player? ").lower()
         with open("default_player.txt", "w") as db:
             db.write(player)
-        if player == "vlc":
-            return "vlc"
-        if player == "mpv":
-            return "mpv"
-        if player == "mplayer":
-            return "mplayer"
+        with open("default_player.txt", "r") as db:
+            df_player = db.read()
+        return df_player
 
 default_player = choose_player()
 
