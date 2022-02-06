@@ -5,7 +5,6 @@ features to be added:
     Enter size value
     like grep command
 '''
-
 import requests
 from bs4 import BeautifulSoup
 from prettytable import PrettyTable
@@ -58,7 +57,7 @@ def get_magnet_links():
 search = input("What are you searching for? ").split(" ")
 search = "+".join(search)
 
-url = f"https://torrentgalaxy.to/torrents.php?search={search}&sort=size&order=desc"
+url = f"https://torrentgalaxy.to/torrents.php?search={search}&sort=seeders&order=desc"
 try:
     response = requests.get(url).text
 except requests.exceptions.RequestException:
@@ -72,25 +71,34 @@ magnets = soup.find_all("a")
 
 
 size = [ item.text for item in sizes ]
-
 title = get_titles()
 magnet = get_magnet_links()
 
-data = {
-    "Title": title,
-    "size": size,
-}
+def use_same_lenght(title, size):
+    diff = len(title) - len(size)
+    if diff > 0:
+        title = title[:-diff]
+    elif diff < 0:
+        size = size[:diff]
+    data = {
+        "Title": title,
+        "size": size,
+        }
+    return data
 
+data = use_same_lenght(title, size)
+
+print(len(data["Title"])-len(data["size"]))
 
 df = PrettyTable()
-
-number = [item for item in range(len(size))]
+number = [item for item in range(len(data["size"]))]
 
 df.add_column("Number", number)
-df.add_column("Title", title)
+df.add_column("Title", data["Title"])
 df.align["Title"] = "l"
-df.add_column("Size", size)
+df.add_column("Size", data["size"])
 print(df)
+
 
 def selection(magnet):
 
