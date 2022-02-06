@@ -6,12 +6,29 @@ features to be added:
     like grep command
 '''
 
-
 import requests
 from bs4 import BeautifulSoup
 from prettytable import PrettyTable
 import subprocess
 
+def choose_player():
+    try:
+        with open("default_player.txt", "r") as db:
+            df_player = db.read()
+        return df_player
+        
+    except FileNotFoundError:
+        player = input("What is your default media player? ").lower()
+        with open("default_player.txt", "w") as db:
+            db.write(player)
+        if player == "vlc":
+            return "vlc"
+        if player == "mpv":
+            return "mpv"
+        if player == "mplayer":
+            return "mplayer"
+
+default_player = choose_player()
 
 def get_titles():
     title = []
@@ -39,7 +56,6 @@ def get_magnet_links():
         if "magnet" in str(link):
             magnet.append(link)
     return magnet
-
 
 
 search = input("What are you searching for? ").split(" ")
@@ -90,16 +106,7 @@ def selection(magnet):
     return magnet[number]
 
 def stream(magnet):
-    # TODO: add the ability to check if a vlc or other video player exist
-    # supported player
-    # DNLA
-    # MPlayer
-    # MPV
-    # OMX
-    # VLC
-    # IINA
-    # SMPlayer
-    # XBMC 
-    subprocess.run(["webtorrent", magnet, "--mpv"])
+    global default_player
+    subprocess.run(["webtorrent", magnet, f"--{default_player}"])
 
 stream(selection(magnet))
