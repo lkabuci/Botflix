@@ -23,7 +23,7 @@
 `git clone https://www.github.com/red-elka/stream-cli ~/.stream-cli`
 
 * First you need to install the python requirements.
-`sudo python ~/.stream-cli/setup.py install`
+`pip install -r requirements.txt`
 
 * Add the run permission to the file.
 `sudo chmod +x ~/.stream-cli/stream-cli`
