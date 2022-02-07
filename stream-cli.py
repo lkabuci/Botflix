@@ -18,7 +18,7 @@ def choose_player():
         return df_player
 
     except FileNotFoundError:
-        player = input("What is your default media player? ").lower()
+        player = input("What is your default media player? (mpv, vlc, mplayer) ").lower()
         with open("default_player.txt", "w") as db:
             db.write(player)
         with open("default_player.txt", "r") as db:
