@@ -9,20 +9,23 @@ import requests
 from bs4 import BeautifulSoup
 from prettytable import PrettyTable
 import subprocess
+import os
 
 def choose_player():
-    try:
+    filename = "default_player.txt"
+    if os.path.exists(filename):
         with open("default_player.txt", "r") as db:
             df_player = db.read()
-        return df_player
-        
-    except FileNotFoundError:
-        player = input("What is your default media player? (mpv, vlc, mplayer) ").lower()
-        with open("default_player.txt", "w") as db:
-            db.write(player)
-        with open("default_player.txt", "r") as db:
-            df_player = db.read()
-        return df_player
+            return df_player
+    
+    player = input("What is your default media player? (mpv, vlc, mplayer) : ").lower()
+
+    if player not in ["mpv","vlc", "mplayer"]:
+        print(f"\033[91mInvalid option chosen. Exiting...\033[0m")
+        exit(0)
+    with open("default_player.txt", "w") as db:
+        db.write(player)
+    return player
 
 default_player = choose_player()
 
@@ -102,12 +105,14 @@ print(df)
 
 def selection(magnet):
 
-    lenght = [item for item in range(len(magnet))]
+    length = [item for item in range(len(magnet))]
     is_invalid = True
     # TODO: add a check if the number is valid or not
     
     number = int(input("Enter Your Choice: "))
-    
+    if number > len(length):
+        print(f"\033[91mInvalid input. Exiting...\033[0m")
+        exit(0)
     return magnet[number]
 
 def stream(magnet):
