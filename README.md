@@ -24,3 +24,10 @@
 * Type the movie that you want to watch
 * Select the choosen one and type the episode number
 * Bring Some Popcorn, Enjoy😉
+
+## Contributors ❤️
+<div align="center">
+	<a href="https://github.com/red-elka/stream-cli/graphs/contributors">
+  	<img src="https://contrib.rocks/image?repo=red-elka/stream-cli" />
+	</a>
+</div>
