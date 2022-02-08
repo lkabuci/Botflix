@@ -99,8 +99,6 @@ def use_same_lenght(title, size):
 
 data = use_same_lenght(title, size)
 
-print(len(data["Title"])-len(data["size"]))
-
 df = PrettyTable()
 number = [item for item in range(len(data["size"]))]
 
