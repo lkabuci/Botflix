@@ -11,6 +11,7 @@ from prettytable import PrettyTable
 import subprocess
 import os
 
+
 def choose_player():
     filename = "default_player.txt"
     if os.path.exists(filename):
@@ -29,19 +30,23 @@ def choose_player():
 
 default_player = choose_player()
 
+
 def get_titles():
     title = []
     for i in range(2, len(size)+2):
-        temp = soup.select(f"div.tgxtablerow:nth-child({i}) > div:nth-child(4) > div:nth-child(1) > a:nth-child(1) > b:nth-child(1)")
+        temp = soup.select(
+            f"div.tgxtablerow:nth-child({i}) > div:nth-child(4) > div:nth-child(1) > a:nth-child(1) > b:nth-child(1)")
         if temp != []:
             for i in temp:
                 i = str(i)
-                removal_list = ["<b>","</b>"]
+                removal_list = ["<b>", "</b>"]
                 edit_string_as_list = i.split("<b>")
-                final_list = [word for word in edit_string_as_list if word not in removal_list]
+                final_list = [
+                    word for word in edit_string_as_list if word not in removal_list]
                 i = ' '.join(final_list)
                 edit_string_as_list = i.split("</b>")
-                final_list = [word for word in edit_string_as_list if word not in removal_list]
+                final_list = [
+                    word for word in edit_string_as_list if word not in removal_list]
                 i = ' '.join(final_list)
                 title.append(i)
     return title
@@ -64,7 +69,8 @@ url = f"https://torrentgalaxy.to/torrents.php?search={search}&sort=seeders&order
 try:
     response = requests.get(url).text
 except requests.exceptions.RequestException:
-    print(f"\033[91mUnable to connect to torrent provider. Please use vpn. Exiting...\033[0m")
+    print(
+        f"\033[91mUnable to connect to torrent provider. Please use vpn. Exiting...\033[0m")
     raise SystemExit(0)
 soup = BeautifulSoup(response, 'html.parser')
 
@@ -73,9 +79,10 @@ sizes = soup.find_all("span", class_="badge badge-secondary")
 magnets = soup.find_all("a")
 
 
-size = [ item.text for item in sizes ]
+size = [item.text for item in sizes]
 title = get_titles()
 magnet = get_magnet_links()
+
 
 def use_same_lenght(title, size):
     diff = len(title) - len(size)
@@ -86,8 +93,9 @@ def use_same_lenght(title, size):
     data = {
         "Title": title,
         "size": size,
-        }
+    }
     return data
+
 
 data = use_same_lenght(title, size)
 
@@ -107,16 +115,18 @@ def selection(magnet):
 
     length = [item for item in range(len(magnet))]
     is_invalid = True
-    # TODO: add a check if the number is valid or not
-    
+    # TODO: re ask for a valid answer 
+
     number = int(input("Enter Your Choice: "))
     if number > len(length):
         print(f"\033[91mInvalid input. Exiting...\033[0m")
         exit(0)
     return magnet[number]
 
+
 def stream(magnet):
     global default_player
     subprocess.run(["webtorrent", magnet, f"--{default_player}"])
+
 
 stream(selection(magnet))
