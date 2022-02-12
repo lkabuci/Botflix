@@ -20,7 +20,7 @@
 	* zsh: `echo "alias stream-cli='~/.stream-cli/stream-cli'" >> ~/.zshrc` -->
 
 ## How it works:
-* Run from the command line `python3 stream-cli`
+* Run from the command line `python3 main.py`
 * Type the movie that you want to watch
 * Select the choosen one and type the episode number
 * Bring Some Popcorn, Enjoy😉
