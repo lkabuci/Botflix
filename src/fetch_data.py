@@ -9,8 +9,7 @@ def search():
     fetch = input("What are you searching for? ").split(" ")
     fetch = "+".join(fetch)
 
-    url = f"https://torrentgalaxy.to/torrents.php?search={fetch}&sort=seeders&order=desc"
-
+    url = f"https://torrentgalaxy.to/torrents.php?c3=1&c46=1&c45=1&c42=1&c4=1&c1=1&search={fetch}&lang=0&nox=2&sort=seeders&order=desc"
     try:
         response = requests.get(url).text
 
@@ -65,6 +64,8 @@ def use_same_length(title, size):
         title = title[:-diff]
     elif diff < 0:
         size = size[:diff]
+    # we can use the zip function with the len of the items 
+    # it will return (episode_number, title, size, magnet)
     data = {
         "Title": title,
         "size": size,
