@@ -1,6 +1,5 @@
 import scrapy
-
-from ..items import ScrappingItem
+from scrapy.crawler import CrawlerProcess
 
 # css selectors for the target data in https://torrentgalaxy.to/
 MOVIES_TABLE = "div.slidingDivb-b6a23717a851a6fc9b4c2e09f0073f0857d7f4d8 div.container-fluid div.tgxtable div.tgxtablerow.txlight"
@@ -10,18 +9,18 @@ MOVIE_MAGNET_LINK = "div.tgxtablecell.collapsehide.rounded.txlight a"
 LINK_SEED = "div.tgxtablecell.collapsehide.rounded.txlight span font b"
 
 class TopMoviesSpider(scrapy.Spider):
-    
+    output = []
     name = "topmovies"
-
     start_urls = [
         'https://torrentgalaxy.to/'
     ]
 
     def parse(self, response):
+        TopMoviesSpider.output = []
         
-        items = ScrappingItem()
         
         for idx, movie in enumerate(response.css(MOVIES_TABLE), start=1):
+            items = {}
             items['index'] = idx
             
             # use the [0] to avoid having the result as a list
@@ -36,6 +35,11 @@ class TopMoviesSpider(scrapy.Spider):
             # use [1]: to get the magnet link
             items['link'] = movie.css(f'{MOVIE_MAGNET_LINK}::attr(href)').getall()[1]
 
+            TopMoviesSpider.output.append(items)
             yield items
     
-    
+def start_scrawling():
+    process = CrawlerProcess()
+    process.crawl(TopMoviesSpider)
+    process.start()
+    return TopMoviesSpider.output

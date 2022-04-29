@@ -13,21 +13,8 @@ SPIDER_MODULES = ['scrapping.spiders']
 NEWSPIDER_MODULE = 'scrapping.spiders'
 
 
-# enable proxy from pipenv install scrapy_proxy_pool
-# docs: https://github.com/rejoiceinhope/scrapy-proxy-pool
-PROXY_POOL_ENABLED = True
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-DOWNLOADER_MIDDLEWARES = {
-   # use a random user agent from pipenv install scrapy_user_agents
-   'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-   'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
-   
-   # proxy settings
-   'scrapy_proxy_pool.middlewares.ProxyPoolMiddleware': 610,
-   'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
-}
-
+#USER_AGENT = 'scrapping (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -75,9 +62,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'scrapping.pipelines.ScrappingPipeline': 300,
-}
+#ITEM_PIPELINES = {
+#    'scrapping.pipelines.ScrappingPipeline': 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
