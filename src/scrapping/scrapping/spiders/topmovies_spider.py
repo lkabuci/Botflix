@@ -1,5 +1,4 @@
 import scrapy
-from scrapy.crawler import CrawlerProcess
 
 # css selectors for the target data in https://torrentgalaxy.to/
 MOVIES_TABLE = "div.slidingDivb-b6a23717a851a6fc9b4c2e09f0073f0857d7f4d8 div.container-fluid div.tgxtable div.tgxtablerow.txlight"
@@ -37,9 +36,3 @@ class TopMoviesSpider(scrapy.Spider):
 
             TopMoviesSpider.output.append(items)
             yield items
-    
-def start_scrawling():
-    process = CrawlerProcess()
-    process.crawl(TopMoviesSpider)
-    process.start()
-    return TopMoviesSpider.output

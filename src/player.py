@@ -1,21 +1,23 @@
+from typing import Callable
 from pathlib import Path
 import os
-'''modules to work with files and paths'''
 
 
 PLAYERS_LIST = ["mpv", "vlc", "mplayer"]
 THE_PATH = "data/player.txt"
 
 
-def is_valid(player_name):
+def is_valid(player_name: str) -> bool:
     '''return True if player exist otherwise False'''
+
+    # the second argument is to check if the file is empty
     if (player_name not in PLAYERS_LIST) or (os.stat(THE_PATH).st_size == 0):
         return False
 
     return True
 
 
-def keep_asking(player):
+def keep_asking(player: str) -> str:
     '''Keep asking for the right answer'''
     is_not_valid = True
     while is_not_valid:
@@ -29,7 +31,7 @@ def keep_asking(player):
     return player
 
 
-def check_player():
+def check_player() -> Callable[[str], str]:
     """takes no argument return name of the player"""
     path = Path(THE_PATH)
     if path.exists():
@@ -42,3 +44,4 @@ def check_player():
         path.write_text(player, encoding='utf-8')
 
         return keep_asking(player)
+
