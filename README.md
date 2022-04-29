@@ -73,4 +73,4 @@ Open a Pull Request.
 </div>
 
 ## License:
-[MIT](https://github.com/redelka00/stream-cli/LICENSE)
+[MIT](https://mit-license.org/)
