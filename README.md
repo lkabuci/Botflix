@@ -1,33 +1,76 @@
-<h1 align="center"><u>Stream-Cli</u></h1>
-<h4 align="center"> Stream-Cli application that allow you to play your favorite movies from the terminal.</h4>
-<em>(the app is tested under a linux machine, looking forward for feedbacks from windows and osx users)</em>
+<p align="center">
+  <img src=".github/logo.gif" />
+</p>
+
+<h2 align='center'> Stream-Cli </h2>
+<strong>stream-cli is a Python streaming command-line interface for streaming your favorite movie directly from your terminal.</strong>
 
 ## Installation:
-* Dependencies: [NodeJS](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [webtorrent](https://github.com/webtorrent/webtorrent)
-* Stream-cli is built with python 3.8 make sure to have the same version or higher.
+> stream-cli is written in python and it depends on [webtorrent](https://github.com/webtorrent/webtorrent-cli), [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com)
 
-* It's Highly  recommended using a virtualenv
-`python -m venv venv`
+1. install NodeJS on your machine ([read mode](https://nodejs.org/en/download/)).
+```bash
+node --version
+v17.9.0 #or higher
+```
+2. make sure that you have npm already installed ([read more](https://docs.npmjs.com/cli/v7/configuring-npm/install)).
+```bash
+npm --version
+8.8.0 # or higher
+```
+3. now let's install webtorrent ([read more](https://github.com/webtorrent/webtorrent-cli)).
+```bash
+npm install webtorrent-cli -g
+webtorrent --version # 4.0.4 (1.8.16)
+```
+_Note: if not installed try with sudo privileges._
 
-* First you need to install the python requirements.
-`pip install -r requirements.txt`
+4. clone the repo in your local machine.
+```bash
+git clone https://github.com/redelka00/stream-cli && cd stream-cli
+```
+![clone results](.github/clone.png)
 
-<!-- * Add the run permission to the file.
-`sudo chmod +x ~/.stream-cli/stream-cli`
- -->
-<!-- * Add an alias to your `~/.bashrc` or `~/.zshrc`
-	* bash : `echo "alias stream-cli='~/.stream-cli/stream-cli'" >> ~/.bashrc`
-	* zsh: `echo "alias stream-cli='~/.stream-cli/stream-cli'" >> ~/.zshrc` -->
+5. create a virtual environment.
+```bash
+python3 -m venv venv && source venv/bin/activate
+```
+![creating virtualenv](.github/virtualenv.png)
 
-## How it works:
-* Run from the command line `python3 main.py`
-* Type the movie that you want to watch
-* Select the chosen one and type the episode number
-* Bring Some Popcorn, Enjoy😉
+6. Install necessary packages.
+```bash
+pip install -r requirements.txt
+```
+![install packages](.github/pipintsall.png)
 
-## Contributors ❤️
+## Usage:
+```bash
+python3 main.py
+```
+* for this demo we gonna search for a movie, but if you don't have any in your mind you can get top movies by typing `Do you want to get top movies? (Y/N):` `Y` in the first option.
+* let's search for [red notice](https://www.imdb.com/title/tt7991608/) for example.
+![usage](.github/usage.png)
+
+![table of search](.github/table_of_movies.png)
+* To start watching you can just type the number of the movie in the table. 
+
+## Contributing:
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch `git checkout -b feature/AmazingFeature`
+3. Commit your Changes `git commit -m 'Add some AmazingFeature`
+4. Push to the Branch `git push origin feature/AmazingFeature`
+Open a Pull Request.
+
+## Contributors❤:
 <div align="center">
 	<a href="https://github.com/red-elka/stream-cli/graphs/contributors">
   	<img src="https://contrib.rocks/image?repo=red-elka/stream-cli" />
 	</a>
 </div>
+
+## License:
+[MIT](https://github.com/redelka00/stream-cli/LICENSE)
