@@ -2,7 +2,7 @@ from typing import Callable
 from pathlib import Path
 import os
 
-
+# supported video player
 PLAYERS_LIST = ["mpv", "vlc", "mplayer"]
 THE_PATH = "data/player.txt"
 

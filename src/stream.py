@@ -3,16 +3,19 @@ import subprocess
 
 def get_magnet(magnets: List[str]) -> str:
     '''takes magnets list, return the chosen magnet'''
+    
+    is_valid = True
+    while is_valid:
+        number = int(input("Enter Your Choice: "))
+        if (number > len(magnets)) or (number <= 0):
+            print("\033[91m Invalid choice. \033[0m")
+        else:
+            is_valid = False
 
-    # is_invalid = True
-    # TODO: re ask for a valid answer
-
-    number = int(input("Enter Your Choice: ")) + 1 # the table shown start from index 1 not 0
-    if number > len(magnets):
-        print("\033[91mInvalid input. Exiting...\033[0m")
-        exit(0)
-
-    return magnets[number]
+    # actual index starts 0 --> 13
+    # but the table shows 1 --> 14
+    # -1 to select from 1 --> 14
+    return magnets[number - 1]
 
 
 def stream(magnet: str, default_player: str) -> None:

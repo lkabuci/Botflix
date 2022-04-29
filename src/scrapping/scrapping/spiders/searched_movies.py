@@ -14,27 +14,33 @@ class SearchedMoviesSpider(scrapy.Spider):
     
     movie = "+".join(input("What movie are you looking for? ").split(" "))    
     start_urls = [
-        f"https://torrentgalaxy.to/torrents.php?c3=1&c46=1&c45=1&c42=1&c4=1&c1=1&search={movie}&lang=0&nox=2&nox=1#results"
+        f"https://torrentgalaxy.to/torrents.php?c3=1&c46=1&c45=1&c42=1&c4=1&c1=1&search={movie}&sort=seeders&order=desc&lang=0&nox=2&nox=1#results"
     ]
 
     def parse(self, response):
         SearchedMoviesSpider.output = []
-        
+
+        only_20_movies = 0
+
         for idx, movie in enumerate(response.css(MOVIES_TABLE), start=1):
-            items = {}
-            items['index'] = idx
+            only_20_movies += 1
             
-            # use the [0] to avoid having the result as a list
-            items['title'] = movie.css(f'{MOVIE_TITLE}::text').getall()[0]
-            items['size'] =  movie.css(f'{MOVIE_SIZE}::text').getall()[0]
-            
-            # [views, seeders, leechers]
-            items['seeds'] = "/".join(movie.css(f'{LINK_SEED}::text').getall()[1:])
-            items['views'] = movie.css(f'{LINK_SEED}::text').getall()[0]
-
-            # use [0]: to access to the download .torrent
-            # use [1]: to get the magnet link
-            items['link'] = movie.css(f'{MOVIE_MAGNET_LINK}::attr(href)').getall()[1]
-
-            SearchedMoviesSpider.output.append(items)
-            yield items
+            if only_20_movies <= 20:
+        
+                items = {}
+                items['index'] = idx
+                
+                # use the [0] to avoid having the result as a list
+                items['title'] = movie.css(f'{MOVIE_TITLE}::text').getall()[0]
+                items['size'] =  movie.css(f'{MOVIE_SIZE}::text').getall()[0]
+                
+                # [views, seeders, leechers]
+                items['seeds'] = "/".join(movie.css(f'{LINK_SEED}::text').getall()[1:])
+                items['views'] = movie.css(f'{LINK_SEED}::text').getall()[0]
+    
+                # use [0]: to access to the download .torrent
+                # use [1]: to get the magnet link
+                items['link'] = movie.css(f'{MOVIE_MAGNET_LINK}::attr(href)').getall()[1]
+    
+                SearchedMoviesSpider.output.append(items)
+                yield items

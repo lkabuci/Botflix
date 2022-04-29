@@ -131,4 +131,5 @@ dmypy.json
 # Custom
 Pipfile
 Pipfile.lock
+data/
 

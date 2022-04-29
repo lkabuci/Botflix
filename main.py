@@ -1,12 +1,25 @@
 from utils import utils
 from utils.utils import start_scrawling, PrintColor
-from src.stream import get_magnet
-
+from src.stream import get_magnet, stream
+from src.player import check_player
+from src.interface import print_table_of_movies
 
 YES_CHOICES = ["", "y", "yes"]
 NO_CHOICES = ["no", "n"]
 EXIT_CHOICES = ['exit', 'quit']
 
+def apprun(chosenOptionClass, is_top_movies_choice: bool) -> None:
+    movies = start_scrawling(chosenOptionClass)
+    utils.clear_screen()
+    if is_top_movies_choice:
+        print_table_of_movies(movies, is_top_movies_choice=True)
+    else:
+        print_table_of_movies(movies, is_top_movies_choice=False)
+    magnets = [movie['link'] for movie in movies]
+    magnet = get_magnet(magnets)
+    player = check_player()
+    stream(magnet, default_player=player)
+    
 
 is_choice_valid = True
 
@@ -14,18 +27,12 @@ while is_choice_valid:
     answer = input('Do you want to get top movies? (Y/N)  ').strip().lower()
     if answer in YES_CHOICES:
         from src.scrapping.scrapping.spiders.topmovies_spider import TopMoviesSpider
-        movies = start_scrawling(TopMoviesSpider)
-        utils.clear_screen()
-        magnets = [movie['link'] for movie in movies]
-        get_magnet(magnets)
+        apprun(TopMoviesSpider, True)
         is_choice_valid = False
     
     elif answer in NO_CHOICES:
         from src.scrapping.scrapping.spiders.searched_movies import SearchedMoviesSpider
-        movies = start_scrawling(SearchedMoviesSpider)
-        utils.clear_screen()
-        magnets = [movie['link'] for movie in movies]
-        get_magnet(magnets)
+        apprun(SearchedMoviesSpider, is_top_movies_choice=False)
         is_choice_valid = False
         
     else:
