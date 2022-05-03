@@ -48,3 +48,4 @@ typing_extensions==4.2.0
 urllib3==1.26.9
 w3lib==1.22.0
 zope.interface==5.4.0
+rich==12.3.0
