@@ -19,29 +19,40 @@ def is_valid(player_name: str) -> bool:
 
 def keep_asking(player: str) -> str:
     '''Keep asking for the right answer'''
-    is_not_valid = True
-    while is_not_valid:
+    
+    player_is_valid = True
+    while player_is_valid:
         if is_valid(player) is False:
             player = input(
                 "What is your default media player? (mpv, vlc, mplayer) : ").lower()
             with open(THE_PATH, mode="w", encoding='utf-8') as file:
                 file.write(player)
         else:
-            is_not_valid = False
+            player_is_valid = False
     return player
 
 
 def check_player() -> Callable[[str], str]:
-    """takes no argument return name of the player"""
+    """return name of the player in data/player.txt"""
+    
+    
     path = Path(THE_PATH)
     if path.exists():
         player = path.read_text(encoding='utf-8').lower()
         return keep_asking(player)
+    
     else:
-        path.touch(exist_ok=True)
         player = input(
             "What is your default media player? (mpv, vlc, mplayer) : ").lower()
-        path.write_text(player, encoding='utf-8')
+        
+        # create a folder then create the player.txt to write in it
+        try:
+            os.mkdir(path='data')
+        except FileExistsError:
+            pass
+            
+        with open("data/player.txt", 'w', encoding='utf-8') as file:
+            file.write(player)
 
         return keep_asking(player)
 
