@@ -44,13 +44,15 @@ pip install -r requirements.txt
 ![install packages](.github/pipintsall.png)
 
 ## Usage:
+* If you want to get top movies:
 ```bash
-python3 main.py
+python3 main.py top
 ```
-* for this demo we gonna search for a movie, but if you don't have any in your mind you can get top movies by typing `Do you want to get top movies? (Y/N):` `Y` in the first option.
-* let's search for [red notice](https://www.imdb.com/title/tt7991608/) for example.
-![usage](.github/usage.png)
-
+* If you want to search for a specific movie (_"[red notice](https://www.imdb.com/title/tt7991608/)"_ for example):
+```bash
+python3 main.py search
+What movie are you looking for? red notice
+```
 ![table of search](.github/table_of_movies.png)
 * To start watching you can just type the number of the movie in the table. 
 
