@@ -1,4 +1,6 @@
 import scrapy
+from rich.console import Console
+console = Console()
 
 
 # css selectors for the target data in https://torrentgalaxy.to/
@@ -12,7 +14,7 @@ class SearchedMoviesSpider(scrapy.Spider):
     output = []
     name = "topmovies"
     
-    movie = "+".join(input("What movie are you looking for? ").split(" "))    
+    movie = "+".join(console.input("[bold]What movie are you looking for? [bold]").split(" "))    
     start_urls = [
         f"https://torrentgalaxy.to/torrents.php?c3=1&c46=1&c45=1&c42=1&c4=1&c1=1&search={movie}&sort=seeders&order=desc&lang=0&nox=2&nox=1#results"
     ]

@@ -16,15 +16,3 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     process.crawl(spider_class)
     process.start()
     return spider_class.output
-
-
-class PrintColor:
-    
-    def red(element_to_print: str) -> None: 
-        print(f"\033[91m{element_to_print}\033[0m")
-    
-    def green(element_to_print: str) -> None:
-        print(f"\033[92m{element_to_print}\033[0m")
-        
-    def yellow(element_to_print: str) -> None:
-        print(f"\033[93m{element_to_print}\033[0m")

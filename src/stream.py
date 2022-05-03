@@ -1,12 +1,15 @@
 from typing import List
 import subprocess
 
+from rich.console import Console
+console = Console()
+
 def get_magnet(magnets: List[str]) -> str:
     '''takes magnets list, return the chosen magnet'''
     
     is_valid = True
     while is_valid:
-        number = int(input("Enter Your Choice: "))
+        number = int(console.input("[bold i]Enter Your Choice: [bold i]"))
         if (number > len(magnets)) or (number <= 0):
             print("\033[91m Invalid choice. \033[0m")
         else:

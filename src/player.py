@@ -2,6 +2,9 @@ from typing import Callable
 from pathlib import Path
 import os
 
+from rich.console import Console
+console = Console()
+
 # supported video player
 PLAYERS_LIST = ["mpv", "vlc", "mplayer"]
 THE_PATH = "data/player.txt"
@@ -23,8 +26,8 @@ def keep_asking(player: str) -> str:
     player_is_valid = True
     while player_is_valid:
         if is_valid(player) is False:
-            player = input(
-                "What is your default media player? (mpv, vlc, mplayer) : ").lower()
+            player = console.input(
+                "What is your default media player? [bold yellow][u](mpv, vlc, mplayer) : [/ u][/ bold yellow]").lower()
             with open(THE_PATH, mode="w", encoding='utf-8') as file:
                 file.write(player)
         else:
@@ -42,8 +45,8 @@ def check_player() -> Callable[[str], str]:
         return keep_asking(player)
     
     else:
-        player = input(
-            "What is your default media player? (mpv, vlc, mplayer) : ").lower()
+        player = console.input(
+            "What is your default media player? [bold yellow][u](mpv, vlc, mplayer) : [/ u][/ bold yellow]").lower()
         
         # create a folder then create the player.txt to write in it
         try:
