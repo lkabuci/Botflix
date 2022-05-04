@@ -6,12 +6,18 @@ from src.interface import print_table_of_movies
 
 import typer
 
+import sys
 
 app = typer.Typer()
 
 
 def apprun(chosenOptionClass, is_top_movies_choice: bool) -> None:
     movies = start_scrawling(chosenOptionClass)
+    
+    # exit if result is null
+    if movies == []:
+        sys.exit("\033[91mUnable to connect to torrent provider. Please use vpn. Exiting...\033[0m")
+        
     utils.clear_screen()
     if is_top_movies_choice:
         print_table_of_movies(movies, is_top_movies_choice=True)
