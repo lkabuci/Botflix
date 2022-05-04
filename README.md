@@ -3,7 +3,8 @@
 </p>
 
 <h2 align='center'> Stream-Cli </h2>
-<strong>stream-cli is a Python streaming command-line interface for streaming your favorite movie directly from your terminal.</strong>
+
+stream-cli is a Python scrapping CLI that combine [scrapy](https://scrapy.org) and [webtorrent](https://github.com/webtorrent/webtorrent-cli) in one command for streaming movies from your terminal.
 
 ## Installation:
 > stream-cli is written in python and it depends on [webtorrent](https://github.com/webtorrent/webtorrent-cli), [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com)
