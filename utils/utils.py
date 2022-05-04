@@ -1,10 +1,10 @@
 from typing import Callable, Generator, List
 from scrapy.crawler import CrawlerProcess
-from os import system, name
+import sys, os
   
 def clear_screen() -> None:
     # for windows 'nt' else for unix
-    system('cls') if name == 'nt' else system('clear')
+    os.system('cls') if os.name == 'nt' else os.system('clear')
 
 
 def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
@@ -15,4 +15,10 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     process = CrawlerProcess()
     process.crawl(spider_class)
     process.start()
+        
+    # exit if result is null
+    if spider_class.output == []:
+        clear_screen()
+        sys.exit("\033[91mUnable to connect to torrent provider. Please use vpn. Exiting...\033[0m")
+        
     return spider_class.output
