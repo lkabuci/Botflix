@@ -45,6 +45,12 @@ pip install -r requirements.txt
 ![install packages](.github/pipintsall.png)
 
 ## Usage:
+* First of all you need to setup a default player.
+> Note the only [vlc](https://www.videolan.org/vlc/) and [mpv](https://mpv.io/) are supported.
+```bash
+python3 main.py config "vlc"
+```
+![config](.github/config.png)
 * If you want to get top movies:
 ```bash
 python3 main.py top
