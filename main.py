@@ -5,7 +5,9 @@ from src.player import check_player
 from src.interface import print_table_of_movies
 
 import typer
+from rich import print
 
+from pathlib import Path
 
 app = typer.Typer()
 
@@ -28,13 +30,25 @@ def apprun(chosenOptionClass, is_top_movies_choice: bool) -> None:
 def top():
     from src.scrapping.scrapping.spiders.topmovies_spider import TopMoviesSpider
     apprun(TopMoviesSpider, True)
-    
+
 
 @app.command(short_help='search for a specific movie')
 def search():
     from src.scrapping.scrapping.spiders.searched_movies import SearchedMoviesSpider
     apprun(SearchedMoviesSpider, is_top_movies_choice=False)
 
+
+@app.command(short_help='setup the default player')
+def config(player: str):
+    directory = Path("config/")
+    if not directory.exists():
+        directory.mkdir()
+    with open("config/player.txt", "w") as file:
+        file.write(player.lower())
+
+    print(f'[bold green]Now "{player}" is your default media player!')
+    
+    
 
 if __name__ == "__main__":
     app()

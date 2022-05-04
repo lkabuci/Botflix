@@ -7,7 +7,7 @@ console = Console()
 
 # supported video player
 PLAYERS_LIST = ["mpv", "vlc", "mplayer"]
-THE_PATH = "data/player.txt"
+THE_PATH = "config/player.txt"
 
 
 def is_valid(player_name: str) -> bool:
@@ -27,7 +27,7 @@ def keep_asking(player: str) -> str:
     while player_is_valid:
         if is_valid(player) is False:
             player = console.input(
-                "What is your default media player? [bold yellow][u](mpv, vlc, mplayer) : [/ u][/ bold yellow]").lower()
+                "What is your default media player? [bold yellow](mpv, vlc, mplayer)[/ bold yellow] :").lower()
             with open(THE_PATH, mode="w", encoding='utf-8') as file:
                 file.write(player)
         else:
@@ -36,7 +36,7 @@ def keep_asking(player: str) -> str:
 
 
 def check_player() -> Callable[[str], str]:
-    """return name of the player in data/player.txt"""
+    """return name of the player in config/player.txt"""
     
     
     path = Path(THE_PATH)
@@ -46,15 +46,15 @@ def check_player() -> Callable[[str], str]:
     
     else:
         player = console.input(
-            "What is your default media player? [bold yellow][u](mpv, vlc, mplayer) : [/ u][/ bold yellow]").lower()
+            "What is your default media player? [bold yellow](mpv, vlc, mplayer)[/ bold yellow] :").lower()
         
         # create a folder then create the player.txt to write in it
         try:
-            os.mkdir(path='data')
+            os.mkdir(path='config')
         except FileExistsError:
             pass
             
-        with open("data/player.txt", 'w', encoding='utf-8') as file:
+        with open("config/player.txt", 'w', encoding='utf-8') as file:
             file.write(player)
 
         return keep_asking(player)
