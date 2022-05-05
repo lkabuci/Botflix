@@ -1,3 +1,4 @@
+import contextlib
 from typing import Callable
 from pathlib import Path
 import os
@@ -14,10 +15,7 @@ def is_valid(player_name: str) -> bool:
     '''return True if player exist otherwise False'''
 
     # the second argument is to check if the file is empty
-    if (player_name not in PLAYERS_LIST) or (os.stat(THE_PATH).st_size == 0):
-        return False
-
-    return True
+    return player_name in PLAYERS_LIST and os.stat(THE_PATH).st_size != 0
 
 
 def keep_asking(player: str) -> str:
@@ -42,20 +40,16 @@ def check_player() -> Callable[[str], str]:
     path = Path(THE_PATH)
     if path.exists():
         player = path.read_text(encoding='utf-8').lower()
-        return keep_asking(player)
-    
     else:
         player = console.input(
             "What is your default media player? [bold yellow](mpv, vlc, mplayer)[/ bold yellow] :").lower()
-        
+
         # create a folder then create the player.txt to write in it
-        try:
+        with contextlib.suppress(FileExistsError):
             os.mkdir(path='config')
-        except FileExistsError:
-            pass
-            
         with open("config/player.txt", 'w', encoding='utf-8') as file:
             file.write(player)
 
-        return keep_asking(player)
+
+    return keep_asking(player)
 
