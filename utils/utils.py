@@ -54,6 +54,6 @@ def is_player_valid() -> bool:
 
 def wrong_player(player):
     print(f"[bold red]Operation failed [u]{player}[/u] is not a valid player[bold red]")
-    print(f"[bold yellow]Hint: the supported players are vlc, mpv and mplayer[/bold yellow]")
-    print(f"[bold]Try again with one of the supported players[/bold]")
+    print("[bold yellow]Hint: the supported players are vlc, mpv and mplayer[/bold yellow]")
+    print("[bold]Try again with one of the supported players[/bold]")
     exit(1)
