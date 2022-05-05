@@ -16,16 +16,10 @@ class TopMoviesSpider(scrapy.Spider):
 
     def parse(self, response):
         TopMoviesSpider.output = []
-        
-        
         for idx, movie in enumerate(response.css(MOVIES_TABLE), start=1):
-            items = {}
-            items['index'] = idx
-            
-            # use the [0] to avoid having the result as a list
-            items['title'] = movie.css(f'{MOVIE_TITLE}::text').getall()[0]
+            items = {'index': idx, 'title': movie.css(f'{MOVIE_TITLE}::text').getall()[0]}
             items['size'] =  movie.css(f'{MOVIE_SIZE}::text').getall()[0]
-            
+
             # [views, seeders, leechers]
             items['seeds'] = "/".join(movie.css(f'{LINK_SEED}::text').getall()[1:])
             items['views'] = movie.css(f'{LINK_SEED}::text').getall()[0]
