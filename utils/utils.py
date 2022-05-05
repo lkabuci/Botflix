@@ -19,6 +19,6 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     # exit if result is null
     if spider_class.output == []:
         clear_screen()
-        sys.exit("\033[91mUnable to connect to torrent provider. Please use vpn. Exiting...\033[0m")
+        sys.exit("\033[91mNo results returned. Refine your search term. It may also be a problem with your vpn.\033[0m")
         
     return spider_class.output
