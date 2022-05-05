@@ -1,4 +1,4 @@
-from unittest.mock import DEFAULT
+from utils.utils import PLAYERS_LIST
 from utils import utils
 from utils.utils import start_scrawling
 from src.stream import get_magnet, stream
@@ -10,7 +10,6 @@ from rich import print
 
 from pathlib import Path
 
-DAFAULT_PLAYERS = ['vlc', 'mpv', 'mplayer']
 
 app = typer.Typer()
 
@@ -31,24 +30,29 @@ def apprun(chosenOptionClass, is_top_movies_choice: bool) -> None:
 
 @app.command(short_help='get table of top movies')
 def top():
-    from src.scrapping.scrapping.spiders.topmovies_spider import TopMoviesSpider
-    apprun(TopMoviesSpider, True)
+    if utils.is_player_valid():
+        from src.scrapping.scrapping.spiders.topmovies_spider import TopMoviesSpider
+        apprun(TopMoviesSpider, True)
+    else:
+        print("[red]Something went wrong, try python3 main.py config 'default_player'[red]")
+        exit(1)
 
 
 @app.command(short_help='search for a specific movie')
 def search():
-    from src.scrapping.scrapping.spiders.searched_movies import SearchedMoviesSpider
-    apprun(SearchedMoviesSpider, is_top_movies_choice=False)
+    if utils.is_player_valid():
+        from src.scrapping.scrapping.spiders.searched_movies import SearchedMoviesSpider
+        apprun(SearchedMoviesSpider, is_top_movies_choice=False)
+    else:
+        print("[red]Something went wrong, try python3 main.py config 'default_player'[red]")
+        exit(1)
 
 
 @app.command(short_help='setup the default player')
 def config(player: str):
     player = player.lower()
-    if player not in DAFAULT_PLAYERS:
-        print(f"[bold red]Operation failed [u]{player}[/u] is not a valid player[bold red]")
-        print(f"[bold yellow]Hint: the supported players are vlc, mpv and mplayer[/bold yellow]")
-        print(f"[bold]Try again with one of the supported players[/bold]")
-        exit(1)
+    if player not in PLAYERS_LIST:
+        utils.wrong_player(player)
     else:    
         directory = Path("config/")
         if not directory.exists():
