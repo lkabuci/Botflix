@@ -33,6 +33,8 @@ git clone https://github.com/redelka00/stream-cli && cd stream-cli
 ![clone results](.github/clone.png)
 
 5. create a virtual environment.
+* Beginner windows users who couldn't setup the [virtualenv] check this doc.
+* Unix Users
 ```bash
 python3 -m venv venv && source venv/bin/activate
 ```
@@ -46,7 +48,7 @@ pip install -r requirements.txt
 
 ## Usage:
 * First of all you need to setup a default player.
-> Note the only [vlc](https://www.videolan.org/vlc/) and [mpv](https://mpv.io/) are supported.
+> Note that only [vlc](https://www.videolan.org/vlc/) and [mpv](https://mpv.io/) are supported.
 ```bash
 python3 main.py config "vlc"
 ```
@@ -84,3 +86,8 @@ Open a Pull Request.
 ## License:
 [MIT](https://mit-license.org/)<br>
 [Copyright](https://www.disclaimertemplate.net/live.php?token=xyytrgo4QtkLMNCB6LEIO6Q39YDFyhu2)
+
+
+
+<!-- Links -->
+[virtualenv]: https://github.com/redelka00/stream-cli/blob/main/docs/windowsVenv.md
