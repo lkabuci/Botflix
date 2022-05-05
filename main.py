@@ -1,3 +1,4 @@
+from unittest.mock import DEFAULT
 from utils import utils
 from utils.utils import start_scrawling
 from src.stream import get_magnet, stream
@@ -8,6 +9,8 @@ import typer
 from rich import print
 
 from pathlib import Path
+
+DAFAULT_PLAYERS = ['vlc', 'mpv', 'mplayer']
 
 app = typer.Typer()
 
@@ -40,13 +43,20 @@ def search():
 
 @app.command(short_help='setup the default player')
 def config(player: str):
-    directory = Path("config/")
-    if not directory.exists():
-        directory.mkdir()
-    with open("config/player.txt", "w") as file:
-        file.write(player.lower())
+    player = player.lower()
+    if player not in DAFAULT_PLAYERS:
+        print(f"[bold red]Operation failed [u]{player}[/u] is not a valid player[bold red]")
+        print(f"[bold yellow]Hint: the supported players are vlc, mpv and mplayer[/bold yellow]")
+        print(f"[bold]Try again with one of the supported players[/bold]")
+        exit(1)
+    else:    
+        directory = Path("config/")
+        if not directory.exists():
+            directory.mkdir()
+        with open("config/player.txt", "w") as file:
+            file.write(player)
 
-    print(f'[bold green]Now "{player}" is your default media player!')
+        print(f'[bold green]Now "{player}" is your default media player!')
     
     
 
