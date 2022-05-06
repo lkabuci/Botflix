@@ -20,6 +20,6 @@ Once you setup the vitual environment succesfully go back to the [README]
 
 
 <!-- Links -->
-[Wondows WSL]: https://docs.microsoft.com/en-us/windows/wsl/
+[Windows WSL]: https://docs.microsoft.com/en-us/windows/wsl/
 [setup]: https://www.liquidweb.com/kb/how-to-setup-a-python-virtual-environment-on-windows-10/
 [README]: https://github.com/redelka00/stream-cli
