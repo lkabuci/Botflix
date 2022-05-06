@@ -1,7 +1,7 @@
 ### <div align='center'>Stream-CLI</div>
 
 #### Instructions to setup Stream-CLI on windows:
-*For windows 10 and 11 users, It's highly recommended to use [Wondows WSL], cause many of the tutorials for Python are written for Linux environments.*
+*For windows 10 and 11 users, It's highly recommended to use [Windows WSL], cause many of the tutorials for Python are written for Linux environments.*
 
 1. Open PowerShell or Windows Command Prompt (cmd).
 2. type the following command `wsl --install`.
