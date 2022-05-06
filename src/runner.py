@@ -21,8 +21,8 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     process.start()
         
     # exit if result is null
+    utils.clear_screen()
     if spider_class.output == []:
-        utils.clear_screen()
         response = urllib.request.urlopen("https://www.torrentgalaxy.to/").getcode()
         if response != 200:
             print("[bold red]Unable to connect to torrent provider. Please use vpn. Exiting[/bold red]")
