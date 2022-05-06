@@ -1,3 +1,6 @@
+# TODO: -> add a proxy 
+#       -> add a random user agent each time
+
 # Scrapy settings for scrapping project
 #
 # For simplicity, this file contains only settings considered important or

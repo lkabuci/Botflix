@@ -22,11 +22,10 @@ class SearchedMoviesSpider(scrapy.Spider):
     def parse(self, response):
         SearchedMoviesSpider.output = []
 
-        only_20_movies = 0
-
         for idx, movie in enumerate(response.css(MOVIES_TABLE), start=1):
-            only_20_movies += 1
-            if only_20_movies <= 20:
+
+            # get only 20 top movies by sorted by seeds/leechers
+            if idx <= 20:
                 
                 items = {'index': idx, 'title': movie.css(f'{MOVIE_TITLE}::text').getall()[0]}
                 items['size'] =  movie.css(f'{MOVIE_SIZE}::text').getall()[0]

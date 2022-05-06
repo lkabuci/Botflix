@@ -4,10 +4,11 @@ from utils.utils import CONFIG_PATH
 from utils import utils
 
 from scrapy.crawler import CrawlerProcess
+from rich import print
 
 from typing import Callable, Generator, List
 from pathlib import Path
-import sys
+import urllib.request
 
 
 def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
@@ -22,12 +23,17 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     # exit if result is null
     if spider_class.output == []:
         utils.clear_screen()
-        sys.exit("\033[91mUnable to connect to torrent provider. Please use vpn. Exiting...\033[0m")
+        response = urllib.request.urlopen("https://www.torrentgalaxy.to/").getcode()
+        if response != 200:
+            print("[bold red]Unable to connect to torrent provider. Please use vpn. Exiting[/bold red]")
+        else:
+            print("[bold red]Movie Not Found Error[/bold red]")
+        exit(1)
         
     return spider_class.output
 
-def apprun(chosenOptionClass, is_top_movies_choice: bool) -> None:
-    movies = start_scrawling(chosenOptionClass)
+def apprun(scraping_class, is_top_movies_choice: bool) -> None:
+    movies = start_scrawling(scraping_class)
      
     utils.clear_screen()
     if is_top_movies_choice:
