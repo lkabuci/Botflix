@@ -26,4 +26,4 @@ def stream(magnet: str, default_player: str) -> None:
     run the process.
     '''
     
-    subprocess.run(["webtorrent", magnet, f"--{default_player}"], check=True, shell=True)
+    subprocess.run(["webtorrent", magnet, f"--{default_player}"], check=True)
