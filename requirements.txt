@@ -37,6 +37,7 @@ requests==2.27.1
 requests-file==1.5.1
 rich==12.3.0
 Scrapy==2.6.1
+scrapy-user-agents==0.1.1
 service-identity==21.1.0
 six==1.16.0
 tldextract==3.2.1
@@ -45,6 +46,8 @@ tomli==2.0.1
 Twisted==22.4.0
 typer==0.4.1
 typing_extensions==4.2.0
+ua-parser==0.10.0
 urllib3==1.26.9
+user-agents==2.2.0
 w3lib==1.22.0
 zope.interface==5.4.0
