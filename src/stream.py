@@ -2,11 +2,13 @@ from typing import List
 import subprocess
 
 from rich.console import Console
+
 console = Console()
 
+
 def get_magnet(magnets: List[str]) -> str:
-    '''takes magnets list, return the chosen magnet'''
-    
+    """takes magnets list, return the chosen magnet"""
+
     is_valid = True
     while is_valid:
         number = int(console.input("[bold i]Enter Your Choice: [bold i]"))
@@ -22,8 +24,8 @@ def get_magnet(magnets: List[str]) -> str:
 
 
 def stream(magnet: str, default_player: str) -> None:
-    '''tages a chosen magnet and a deafult player
+    """tages a chosen magnet and a deafult player
     run the process.
-    '''
-    
+    """
+
     subprocess.run(["webtorrent", magnet, f"--{default_player}"], check=True)
