@@ -51,7 +51,7 @@ class ScrappingSpiderMiddleware:
         yield from start_requests
 
     def spider_opened(self, spider):
-        spider.logger.info(f'Spider opened: {spider.name}')
+        spider.logger.info(f"Spider opened: {spider.name}")
 
 
 class ScrappingDownloaderMiddleware:
@@ -98,4 +98,4 @@ class ScrappingDownloaderMiddleware:
         pass
 
     def spider_opened(self, spider):
-        spider.logger.info(f'Spider opened: {spider.name}')
+        spider.logger.info(f"Spider opened: {spider.name}")
