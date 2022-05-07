@@ -8,7 +8,7 @@ from rich import print
 
 from typing import Callable, Generator, List
 from pathlib import Path
-import urllib.request
+import requests
 
 
 def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
@@ -23,7 +23,7 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     # exit if result is null
     utils.clear_screen()
     if spider_class.output == []:
-        response = urllib.request.urlopen("https://www.torrentgalaxy.to/").getcode()
+        response = requests.get("https://www.torrentgalaxy.to/").status_code
         if response != 200:
             print(
                 "[bold red]Unable to connect to torrent provider. Please use vpn. Exiting[/bold red]"
