@@ -16,7 +16,11 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     return a list of movies inside a dictionnary
     """
 
-    process = CrawlerProcess()
+    process = CrawlerProcess(
+        settings={
+            "LOG_LEVEL": "ERROR",
+        }
+    )
     process.crawl(spider_class)
     process.start()
 

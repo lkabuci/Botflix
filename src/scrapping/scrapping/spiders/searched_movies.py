@@ -36,18 +36,13 @@ class SearchedMoviesSpider(scrapy.Spider):
                 items = {
                     "index": idx,
                     "title": movie.css(f"{MOVIE_TITLE}::text").getall()[0],
+                    "size": movie.css(f"{MOVIE_SIZE}::text").getall()[0],
+                    # [views, seeders, leechers]
+                    "seeds": "/".join(movie.css(f"{LINK_SEED}::text").getall()[1:]),
+                    "views": movie.css(f"{LINK_SEED}::text").getall()[0],
+                    # use [0]: to access to the download .torrent
+                    # use [1]: to get the magnet link
+                    "link": movie.css(f"{MOVIE_MAGNET_LINK}::attr(href)").getall()[1],
                 }
-                items["size"] = movie.css(f"{MOVIE_SIZE}::text").getall()[0]
-
-                # [views, seeders, leechers]
-                items["seeds"] = "/".join(movie.css(f"{LINK_SEED}::text").getall()[1:])
-                items["views"] = movie.css(f"{LINK_SEED}::text").getall()[0]
-
-                # use [0]: to access to the download .torrent
-                # use [1]: to get the magnet link
-                items["link"] = movie.css(f"{MOVIE_MAGNET_LINK}::attr(href)").getall()[
-                    1
-                ]
 
                 SearchedMoviesSpider.output.append(items)
-                yield items

@@ -13,9 +13,15 @@ def get_magnet(magnets: List[str]) -> str:
     magnet_count = len(magnets)
     while (number < 0) or (number > magnet_count):
         try:
-            number = int(console.input("[bold i]Enter Your Choice (or 0 if you want to quit): [bold i]"))
+            number = int(
+                console.input(
+                    "[bold i]Enter Your Choice (or 0 if you want to quit): [bold i]"
+                )
+            )
             if (number < 0) or (number > magnet_count):
-                console.print(f"[red]Your choice must be between 0 (quit) and {magnet_count}.[red]")
+                console.print(
+                    f"[red]Your choice must be between 0 (quit) and {magnet_count}.[red]"
+                )
         except Exception:
             console.print("[red]Invalid input.[red]")
     if number == 0:
