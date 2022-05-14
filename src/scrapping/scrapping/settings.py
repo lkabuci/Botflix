@@ -1,23 +1,8 @@
-# TODO: -> add a proxy
-#       -> add a random user agent each time
-
-# Scrapy settings for scrapping project
-#
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     https://docs.scrapy.org/en/latest/topics/settings.html
-#     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-
 BOT_NAME = "scrapping"
 
 SPIDER_MODULES = ["scrapping.spiders"]
 NEWSPIDER_MODULE = "scrapping.spiders"
 
-
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'scrapping (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -26,10 +11,8 @@ ROBOTSTXT_OBEY = True
 # CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
-# See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
-# See also autothrottle settings and docs
 # DOWNLOAD_DELAY = 3
-# The download delay setting will honor only one of:
+
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
 
