@@ -1,5 +1,4 @@
 from rich import print
-from rich.console import Console
 
 import os
 from pathlib import Path
@@ -10,8 +9,7 @@ CONFIG_PATH = "config/player.txt"
 
 
 def clear_screen() -> None:
-    console = Console()
-    console.clear()
+    os.system("clear") if os.name == "posix" else os.system("cls")
 
 
 def is_player_valid() -> bool:

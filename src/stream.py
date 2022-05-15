@@ -1,7 +1,9 @@
+from rich.console import Console
+
 from typing import List
 import subprocess
+import os
 
-from rich.console import Console
 
 console = Console()
 
@@ -39,4 +41,13 @@ def stream(magnet: str, default_player: str) -> None:
     run the process.
     """
 
-    subprocess.run(["webtorrent", magnet, f"--{default_player}"], check=True)
+    if os.name == "posix":
+        subprocess.run(["webtorrent", magnet, f"--{default_player}"], check=True)
+    else:
+        # on windows we can't lunch the `vlc` command from terminal
+        # we can use vlc.exe file if only we are inside the C:\program files\videolan\VLC\
+        # But not outside like in home directory for example C:\program files\videolan\VLC\vlc.exe
+        # this doesn't work if you know a way to lunch vlc from any place, feel free to open a PR :)
+        subprocess.run(
+            ["webtorrent", magnet, f"--{default_player}"], check=True, shell=True
+        )
