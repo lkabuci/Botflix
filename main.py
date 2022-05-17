@@ -36,6 +36,18 @@ def search():
         )
         exit(1)
 
+@app.command(short_help="search for a specific TVSerie")
+def serie():
+    if utils.is_player_valid():
+        from src.scrapping.scrapping.spiders.series import SeriesSpider
+
+        apprun(SeriesSpider, is_top_movies_choice=False)
+    else:
+        print(
+            "[red]Something went wrong, try python3 main.py config 'default_player'[red]"
+        )
+        exit(1)
+
 
 @app.command(short_help="setup the default player")
 def config(player: str):
