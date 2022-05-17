@@ -1,3 +1,10 @@
+<!-- ToDO:
+* ADD documentation about setting up VLC path on windows
+* ADD documentations about series option 
+-->
+
+
+
 <p align="center">
   <img src=".github/logo.gif" />
 </p>
