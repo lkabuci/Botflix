@@ -1,7 +1,6 @@
 from rich.console import Console
 
 from typing import List
-import subprocess
 import os
 
 
@@ -41,13 +40,11 @@ def stream(magnet: str, default_player: str) -> None:
     run the process.
     """
 
-    if os.name == "posix":
-        subprocess.run(["webtorrent", magnet, f"--{default_player}"], check=True)
-    else:
-        # on windows we can't launch the `vlc` command from terminal
-        # we can use vlc.exe file if only we are inside the C:\program files\videolan\VLC\
-        # But not outside like in home directory for example C:\program files\videolan\VLC\vlc.exe
-        # this doesn't work if you know a way to lunch vlc from any place, feel free to open a PR :)
-        subprocess.run(
-            ["webtorrent", magnet, f"--{default_player}"], check=True, shell=True
-        )
+    try:
+        os.system(f'webtorrent "{magnet}" --{default_player}')
+    except:
+        print(f"[red bold]Error: {default_player} is not in your PATH!", end="\n")
+        print(f"Please consider adding the default player to the right path", end="\n")
+        print("Quitting... [/red bold]")
+        exit(1)
+        
