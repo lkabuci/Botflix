@@ -36,6 +36,7 @@ def search():
         )
         exit(1)
 
+
 @app.command(short_help="search for a specific TVSerie")
 def serie():
     if utils.is_player_valid():

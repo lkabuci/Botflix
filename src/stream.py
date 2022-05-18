@@ -47,4 +47,3 @@ def stream(magnet: str, default_player: str) -> None:
         print(f"Please consider adding the default player to the right path", end="\n")
         print("Quitting... [/red bold]")
         exit(1)
-        
