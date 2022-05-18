@@ -56,6 +56,7 @@ pip install -r requirements.txt
 ## Usage:
 * First of all you need to setup a default player.
 > Note that only [vlc](https://www.videolan.org/vlc/) and [mpv](https://mpv.io/) are supported.
+> If you are a windows user make sure that you add your player to the PATH. [read more][(](https://www.vlchelp.com/add-vlc-command-prompt-windows/)
 ```bash
 python3 main.py config "vlc"
 ```
