@@ -1,10 +1,3 @@
-<!-- ToDO:
-* ADD documentation about setting up VLC path on windows
-* ADD documentations about series option 
--->
-
-
-
 <p align="center">
   <img src=".github/logo.gif" />
 </p>
@@ -64,6 +57,10 @@ python3 main.py config "vlc"
 * If you want to get top movies:
 ```bash
 python3 main.py top
+```
+* If you want to watch a TVSerie:
+```bash
+python3 main.py serie
 ```
 * If you want to search for a specific movie (_"[red notice](https://www.imdb.com/title/tt7991608/)"_ for example):
 ```bash
