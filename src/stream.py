@@ -42,7 +42,8 @@ def stream(magnet: str, default_player: str) -> None:
 
     try:
         os.system(f'webtorrent "{magnet}" --{default_player}')
-    except FileNotFoundError:
+    except Exception as e:
+        print(e)
         print(f"[red bold]Error: {default_player} is not in your PATH!", end="\n")
         print("Please consider adding the default player to the right path", end="\n")
         print("Quitting... [/red bold]")
