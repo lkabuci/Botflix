@@ -29,10 +29,10 @@ def get_magnet(magnets: List[str]) -> str:
         console.print("[red]Quitting...[red]")
         exit()
     else:
-        return magnets[number - 1]
         # actual index starts 0 --> 13
         # but the table shows 1 --> 14
         # -1 to select from 1 --> 14
+        return magnets[number - 1]
 
 
 def stream(magnet: str, default_player: str) -> None:

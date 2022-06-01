@@ -1,6 +1,6 @@
 from utils.utils import PLAYERS_LIST
 from utils import utils
-from src.runner import apprun
+from stream_cli.runner import apprun
 
 import typer
 from rich import print
@@ -14,7 +14,7 @@ app = typer.Typer()
 @app.command(short_help="get table of top movies")
 def top():
     if utils.is_player_valid():
-        from src.scrapping.scrapping.spiders.topmovies_spider import TopMoviesSpider
+        from stream_cli.API.torrentgalaxy import TopMoviesSpider
 
         apprun(TopMoviesSpider, True)
     else:
@@ -27,9 +27,9 @@ def top():
 @app.command(short_help="search for a specific movie")
 def search():
     if utils.is_player_valid():
-        from src.scrapping.scrapping.spiders.searched_movies import SearchedMoviesSpider
+        from stream_cli.API.torrentgalaxy import MoviesSpider
 
-        apprun(SearchedMoviesSpider, is_top_movies_choice=False)
+        apprun(MoviesSpider, is_top_movies_choice=False)
     else:
         print(
             "[red]Something went wrong, try python3 main.py config 'default_player'[red]"
@@ -40,7 +40,7 @@ def search():
 @app.command(short_help="search for a specific TVSerie")
 def serie():
     if utils.is_player_valid():
-        from src.scrapping.scrapping.spiders.series import SeriesSpider
+        from stream_cli.API.torrentgalaxy import SeriesSpider
 
         apprun(SeriesSpider, is_top_movies_choice=False)
     else:

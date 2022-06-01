@@ -1,5 +1,5 @@
-from src.stream import stream, get_magnet
-from src.interface import print_table_of_movies
+from stream_cli.stream import stream, get_magnet
+from stream_cli.interface import print_table_of_movies
 from utils.utils import CONFIG_PATH
 from utils import utils
 
@@ -19,6 +19,7 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     process = CrawlerProcess(
         settings={
             "LOG_LEVEL": "ERROR",
+            "USER_AGENT": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36",
         }
     )
     process.crawl(spider_class)
