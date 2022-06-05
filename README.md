@@ -83,8 +83,8 @@ Open a Pull Request.
 
 ## Contributors❤:
 <div align="center">
-	<a href="https://github.com/red-elka/stream-cli/graphs/contributors">
-  	<img src="https://contrib.rocks/image?repo=red-elka/stream-cli" />
+	<a href="https://github.com/kaboussi/stream-cli/graphs/contributors">
+  	<img src="https://contrib.rocks/image?repo=kaboussi/stream-cli" />
 	</a>
 </div>
 
