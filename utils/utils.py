@@ -1,11 +1,16 @@
 from rich import print
+from rich.console import Console
+import requests
 
 import os
 from pathlib import Path
 
 
+
 PLAYERS_LIST = ["mpv", "vlc", "mplayer"]
 CONFIG_PATH = "config/player.txt"
+
+console = Console()
 
 
 def clear_screen() -> None:
@@ -36,3 +41,28 @@ def wrong_player(player):
     )
     print("[bold]Try again with one of the supported players[/bold]")
     exit(1)
+    
+
+def handle_erros(url: str):
+    # ASK your Aquib to test the requests error! to handle the VPN situation
+    # Connection Error if i'm not connected to the internet
+
+    
+    try:
+        requests.get(url)
+
+    except requests.exceptions.ConnectionError:
+        console.print("[bold red]ERR_INTERNET_DISCONNECTED[red bold]")
+
+    except requests.exceptions.HTTPError:
+        console.print(
+            "[bold red]The wesite is probably prohibited in your country please consider using a VPN[bold red]"
+        )
+        exit()
+
+    except requests.exceptions.RequestException as err:
+        print(err)
+        exit()
+    
+    
+# print(":right_arrow:")
