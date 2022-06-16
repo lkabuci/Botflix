@@ -1,7 +1,7 @@
 from stream_cli.stream import stream, get_magnet
 from stream_cli.interface import print_table_of_movies
-from utils.utils import CONFIG_PATH
-from utils import utils
+from helper.utils import CONFIG_PATH
+from helper import utils
 
 from scrapy.crawler import CrawlerProcess
 from rich import print

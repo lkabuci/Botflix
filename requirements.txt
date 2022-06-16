@@ -5,3 +5,4 @@ pre-commit==2.19.0
 Scrapy==2.6.1
 typer==0.4.1
 rich==12.4.4
+simple-term-menu
