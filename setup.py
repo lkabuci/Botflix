@@ -1,5 +1,6 @@
-import setuptools
 from pathlib import Path
+
+import setuptools
 
 requirements = Path("requirements.txt").read_text().splitlines()
 readme = Path("README.md").read_text()

@@ -1,14 +1,12 @@
-from rich import print
-from rich.console import Console
-import requests
-
 import os
 from pathlib import Path
 
-
+import requests
+from rich import print
+from rich.console import Console
 
 PLAYERS_LIST = ["mpv", "vlc", "mplayer"]
-CONFIG_PATH = "config/player.txt"
+PLAYER_FILE = "player.txt"
 
 console = Console()
 
@@ -18,36 +16,31 @@ def clear_screen() -> None:
 
 
 def is_player_valid() -> bool:
-    """return True if player exist otherwise False"""
+    """return True if player is valid otherwise False"""
+
     try:
-        player_name = Path(CONFIG_PATH).read_text()
+        player_name = Path(PLAYER_FILE).read_text()
+    except FileNotFoundError:
+        return False
+    if (player_name not in PLAYERS_LIST) or (os.stat(PLAYER_FILE).st_size == 0):
+        return False
 
-    except FileNotFoundError as e:
-        print(f"{e}\n[bold yellow]Try python3 main.py config [/bold yellow]")
-        exit(1)
-
-    else:
-        # the second argument is to check if the file is empty
-        if (player_name not in PLAYERS_LIST) or (os.stat(CONFIG_PATH).st_size == 0):
+    # Check if player is in windows path
+    if os.name == "nt":
+        for exec_path in os.get_exec_path():
+            if any(
+                player_name.lower()
+                in list(map(lambda x: x.lower(), exec_path.split(os.sep)))
+            ):
+                return True
+        else:
+            print(f"[blod red]{player_name} is not in your path[bold red]")
             return False
-
     return True
 
 
-def wrong_player(player):
-    print(f"[bold red]Operation failed [u]{player}[/u] is not a valid player[bold red]")
-    print(
-        "[bold yellow]Hint: the supported players are vlc, mpv and mplayer[/bold yellow]"
-    )
-    print("[bold]Try again with one of the supported players[/bold]")
-    exit(1)
-    
-
 def handle_erros(url: str):
-    # ASK your Aquib to test the requests error! to handle the VPN situation
-    # Connection Error if i'm not connected to the internet
-
-    
+    clear_screen()
     try:
         requests.get(url)
 
@@ -56,13 +49,23 @@ def handle_erros(url: str):
 
     except requests.exceptions.HTTPError:
         console.print(
-            "[bold red]The wesite is probably prohibited in your country please consider using a VPN[bold red]"
+            "[bold red]The host is probably banned in your country please consider using a VPN or choose another host[bold red]"
         )
         exit()
 
     except requests.exceptions.RequestException as err:
         print(err)
         exit()
-    
-    
-# print(":right_arrow:")
+
+
+def set_player(name: str):
+    player = Path(PLAYER_FILE)
+    player.write_text(name)
+
+
+def get_player() -> str:
+    player = Path(PLAYER_FILE)
+    if player.exists():
+        return player.read_text()
+    else:
+        print("[red bold]You need to setup a default player first[bold red]")

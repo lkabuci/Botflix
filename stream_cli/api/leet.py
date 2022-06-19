@@ -1,9 +1,10 @@
-from helper.utils import handle_erros
+from typing import Optional
 
 import scrapy
+from rich.console import Console
 from scrapy.crawler import CrawlerProcess
 
-from typing import Optional
+from helper.utils import handle_erros
 
 MOVIES = "tbody tr"
 MOVIE_INFO = "div.torrent-detail-page"
@@ -20,31 +21,29 @@ MAGNET = "div.no-top-radius div.clearfix ul li a::attr(href)"
 
 
 handle_erros("https://www.1337x.to/")
+console = Console()
 
 
-def leet(category: str = None, name: Optional[str] = None):
+def leet(category: Optional[str] = None):
     def _set_category() -> str:
         """return the target url"""
 
-        converted_name = "%20".join(name.split()) + "%207" if name is not None else None
-
-        if (category is None) or (name is None):
+        if category is None:
             return "https://1337x.to/popular-movies"
 
-        elif category == "movie":
-            return f"https://1337x.to/category-search/{converted_name}%207/Movies/1/"
-
-        elif category == "serie":
-            return f"https://1337x.to/category-search/{converted_name}%207/TV/1/"
-
         else:
-            print("invalid category")
-            exit(1)
+            name = console.input("[bold]What are you looking for? ")
+            converted_name = (
+                "%20".join(name.split()) + "%207" if name is not None else None
+            )
 
-    # def _set_limit() -> int:
-    #     """return the limit of results as int"""
-    #     limit_results = ask_for_limit()
-    #     return 27 if limit_results > 27 else limit_results
+            if category == "movie":
+                return (
+                    f"https://1337x.to/category-search/{converted_name}%207/Movies/1/"
+                )
+
+            elif category == "serie":
+                return f"https://1337x.to/category-search/{converted_name}%207/TV/1/"
 
     class _Leet(scrapy.Spider):
 
@@ -84,21 +83,3 @@ def leet(category: str = None, name: Optional[str] = None):
             yield items
 
     return _Leet
-
-
-# This is just for testing the spider manually
-if __name__ == "__main__":
-    process = CrawlerProcess(
-        settings={
-            "LOG_LEVEL": "ERROR",
-            "USER_AGENT": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.93 Safari/537.36",
-        }
-    )
-
-    spider_class = leet(category="serie", name="peaky blinders")
-    process.crawl(spider_class)
-    process.start()
-    ouut = spider_class.output
-
-    print(ouut)
-    print(len(ouut))
