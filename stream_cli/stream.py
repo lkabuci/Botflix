@@ -1,8 +1,7 @@
-from rich.console import Console
-
-from typing import List
 import os
+from typing import List
 
+from rich.console import Console
 
 console = Console()
 
@@ -29,14 +28,14 @@ def get_magnet(magnets: List[str]) -> str:
         console.print("[red]Quitting...[red]")
         exit()
     else:
-        return magnets[number - 1]
         # actual index starts 0 --> 13
         # but the table shows 1 --> 14
         # -1 to select from 1 --> 14
+        return magnets[number - 1]
 
 
 def stream(magnet: str, default_player: str) -> None:
-    """tages a chosen magnet and a deafult player
+    """takes a chosen magnet and a deafult player
     run the process.
     """
 

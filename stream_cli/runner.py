@@ -1,14 +1,14 @@
-from src.stream import stream, get_magnet
-from src.interface import print_table_of_movies
-from utils.utils import CONFIG_PATH
-from utils import utils
-
-from scrapy.crawler import CrawlerProcess
-from rich import print
-
+import sys
 from typing import Callable, Generator, List
-from pathlib import Path
+
 import requests
+from rich import print
+from scrapy.crawler import CrawlerProcess
+
+from helper import utils
+from helper.user_angent import get_user_agent
+from stream_cli.interface import print_table_of_movies
+from stream_cli.stream import get_magnet, stream
 
 
 def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
@@ -16,9 +16,14 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     return a list of movies inside a dictionnary
     """
 
+    twisted_error = "twisted.internet.reactor"
+    if twisted_error in sys.modules:
+        del sys.modules[twisted_error]
+
     process = CrawlerProcess(
         settings={
             "LOG_LEVEL": "ERROR",
+            "USER_AGENT": get_user_agent(),
         }
     )
     process.crawl(spider_class)
@@ -39,16 +44,14 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     return spider_class.output
 
 
-def apprun(scraping_class, is_top_movies_choice: bool) -> None:
+def apprun(scraping_class) -> None:
+    if not utils.is_player_valid():
+        print("[bold red]Setup a default player first[bold red]")
+        exit(1)
     movies = start_scrawling(scraping_class)
-
-    utils.clear_screen()
-    if is_top_movies_choice:
-        print_table_of_movies(movies, is_top_movies_choice=True)
-    else:
-        print_table_of_movies(movies, is_top_movies_choice=False)
-    magnets = [movie["link"] for movie in movies]
+    print_table_of_movies(movies)
+    magnets = [movie["magnet"] for movie in movies]
     magnet = get_magnet(magnets)
 
-    player = Path(CONFIG_PATH).read_text()
+    player = utils.get_player()
     stream(magnet, default_player=player)

@@ -1,3 +1,6 @@
+# player config
+player.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 .pytest_cache/
@@ -18,3 +21,6 @@ Pipfile.lock
 config/
 data/
 
+# node
+node_modules/
+*.json
