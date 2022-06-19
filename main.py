@@ -1,35 +1,44 @@
-import time
-
+from rich.console import Console
 from simple_term_menu import TerminalMenu
 
-def choose_category(terminal, category: str):
-    while not terminal_exit:
-        category = terminal.show()
-        if category == 1:
-            return "top"
-        elif category == 2:
-            return "movie"
-        elif category == 3:
-            return "serie"
-        elif category == 4:
-            print("Have a nice day")
-            exit(1)
+from helper.utils import set_player
+from stream_cli.api.leet import leet
+from stream_cli.api.torrentgalaxy import torrent_galaxy
+from stream_cli.runner import apprun
+
+console = Console()
 
 
-def set_provider(provider: str, category: str):
-    if provider == "tgx" and category == "top":
-        print("You choose")
-        time.sleep(5)
-        return
-    elif provider == "leet":
-        return
-    elif provider == "yts":
-        return
+def get_top(choice):
+    choices = {
+        1: apprun(torrent_galaxy()),
+        2: apprun(leet()),
+    }
+    return choices[choice]
+
+
+def get_movie(choice):
+    choices = {
+        1: apprun(torrent_galaxy("movie")),
+        2: apprun(leet("movie")),
+    }
+    return choices[choice]
+
+
+def get_serie(choice):
+    choices = {1: apprun(torrent_galaxy("serie")), 2: apprun(leet("serie"))}
+    return choices[choice]
 
 
 def main():
     main_menu_title = " Stream-CLI\n"
-    main_menu_items = ["TGX", "LEET", "YTS", "Piratebay", "Configuration", "Quit"]
+    main_menu_items = [
+        "Top movies",
+        "Search for a movie",
+        "Search for a TvSerie",
+        "Configuration",
+        "Quit",
+    ]
     main_menu_cursor = "> "
     main_menu_cursor_style = ("fg_red", "bold")
     main_menu_exit = False
@@ -43,119 +52,79 @@ def main():
         clear_screen=True,
     )
 
-    edit_menu_title = " Configuration: \n"
-    edit_menu_items = ["Edit Config", "Back to Main Menu"]
-    edit_menu_back = False
-    edit_menu = TerminalMenu(
-        edit_menu_items,
-        title=edit_menu_title,
+    config_title = " Choose a default player: \n"
+    config_items = ["Back to Main Menu", "VLC", "MPV"]
+    config_back = False
+    config = TerminalMenu(
+        config_items,
+        title=config_title,
         menu_cursor=main_menu_cursor,
         menu_cursor_style=main_menu_cursor_style,
         cycle_cursor=True,
         clear_screen=True,
     )
 
-    categories = ["List the top movies", "Search for a movie", "Search fir a TvSerie", "Quit"]
-    categories_exit = False
-    choose_category = TerminalMenu(
-        menu_entries = categories,
-        menu_cursor = main_menu_cursor,
-        menu_cursor_style = main_menu_cursor_style,
-        cycle_cursor = True,
-        clear_screen = True
-    )    
+    host = ["Back to main menu", "TGx", "1337x", "YTS"]
+    host_back = False
+    choose_host = TerminalMenu(
+        menu_entries=host,
+        menu_cursor=main_menu_cursor,
+        menu_cursor_style=main_menu_cursor_style,
+        cycle_cursor=True,
+        clear_screen=True,
+    )
 
     while not main_menu_exit:
         main_sel = main_menu.show()
 
-        if main_sel == 4:
-            while not edit_menu_back:
-                edit_sel = edit_menu.show()
-                if edit_sel == 0:
-                    print("Edit Config Selected")
-                    time.sleep(2)
-                elif edit_sel == 1:
-                    edit_menu_back = True
-                    print("Back Selected")
-            edit_menu_back = False
+        # Top Movies
+        if main_sel == 0:
+            while not host_back:
+                hosts = choose_host.show()
+                if hosts == 0:
+                    host_back = True
+                else:
+                    get_top(hosts)
+            host_back = False
 
-        elif main_sel == 0:
-            while not categories_exit:
-                choose_category("tgx")
-
+        # Search By a movies
         elif main_sel == 1:
-            while not categories_exit:
-                choose_category("leet")
+            while not host_back:
+                hosts = choose_host.show()
+                if hosts == 0:
+                    host_back = True
+                else:
+                    get_movie(hosts)
+            host_back = False
 
+        # Search By TvShows
         elif main_sel == 2:
-            while not categories_exit:
-                choose_category("yts")
+            while not host_back:
+                hosts = choose_host.show()
+                if hosts == 0:
+                    host_back = True
+                else:
+                    get_serie(hosts)
+            host_back = False
 
+        # Configuration
         elif main_sel == 3:
-            print("Edit")
+            while not config_back:
+                edit_sel = config.show()
+                if edit_sel == 0:
+                    config_back = True
+                elif edit_sel == 1:
+                    set_player("vlc")
+                    config_back = True
+                elif edit_sel == 2:
+                    set_player("mpv")
+                    config_back = True
+            config_back = False
 
-        elif main_sel == 5:
+        # Quit
+        elif main_sel == 4:
             main_menu_exit = True
-            print("GoodBye")
+
 
 if __name__ == "__main__":
     main()
-
-
-
-# from typing import Optional
-# from stream_cli.api.torrentgalaxy import torrent_galaxy
-
-# from helper.utils import PLAYERS_LIST
-# from helper import utils
-# from stream_cli.runner import apprun
-
-# import typer
-# from rich import print
-# from rich import console
-
-# from pathlib import Path
-
-
-# app = typer.Typer()
-# console = console.Console()
-
-
-# @app.command(short_help="get table of top movies")
-# # def main(name: str = typer.Argument("Wade Wilson")):
-# def top(source: Optional[str] = typer.Argument("tgx"), limit: Optional[str] = 10):
-#     source = source.lower()
-#     if source == "tgx":
-#         apprun(torrent_galaxy(), True)
-
-
-# @app.command(short_help="search for a specific movie")
-# def search(name: str):
-#     apprun(MoviesSpider(name), is_top_movies_choice=False)
-
-
-# @app.command(short_help="search for a specific TVSerie")
-# def serie(name: str):
-#     apprun(SeriesSpider(name), is_top_movies_choice=False)
-
-
-# @app.command
-# def config(player: str = typer.Option("mpv", help="set the default player")):
-#     player = player.lower()
-#     if player not in PLAYERS_LIST:
-#         utils.wrong_player(player)
-#     else:
-#         directory = Path("config/")
-#         if not directory.exists():
-#             directory.mkdir()
-#         with open("config/player.txt", "w") as file:
-#             file.write(player)
-
-#         print(f'[bold green]Now "{player}" is your default media player!')
-
-# if __name__ == "__main__":
-#     if utils.is_player_valid():
-#         app()
-#     else:
-#         print("[red]Something went wrong, try python3 main.py config 'default_player'[red]")
-#         exit(1)
