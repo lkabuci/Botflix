@@ -1,3 +1,5 @@
+from helper.utils import handle_erros
+
 import scrapy
 from scrapy.crawler import CrawlerProcess
 
@@ -8,33 +10,41 @@ MOVIE_INFO = "div.torrent-detail-page"
 TITLE = "div h1::text"
 SIZE = "div.no-top-radius div.clearfix ul.list li:nth-child(4) span::text"
 SEEDS = "div.no-top-radius div.clearfix ul.list:nth-child(3) li:nth-child(4) span::text"
-LEECHES = "div.no-top-radius div.clearfix ul.list:nth-child(3) li:nth-child(5) span::text"
+LEECHES = (
+    "div.no-top-radius div.clearfix ul.list:nth-child(3) li:nth-child(5) span::text"
+)
 VIEWS = "div.no-top-radius div.clearfix ul.list:nth-child(3) li span::text"
 DOMAIN = "https://1337x.to"
 PAGE_INFO = "td a:nth-child(2)::attr(href)"
 MAGNET = "div.no-top-radius div.clearfix ul li a::attr(href)"
 
 
-# I need to go inside the (MOVIEPAGE) and get the link
+handle_erros("https://www.1337x.to/")
 
-def leet(name: Optional[str], category: str, limit_results: int):
 
+def leet(category: str = None, name: Optional[str] = None):
     def _set_category() -> str:
         """return the target url"""
 
-        converted_name = "%20".join(name.split()) + "%207"
+        converted_name = "%20".join(name.split()) + "%207" if name is not None else None
 
-        if category == "movie":
-            return f"https://1337x.to/category-search/{converted_name}%207/Movies/1/"
-        elif category == "serie":
-            return f"https://1337x.to/category-search/{converted_name}%207/TV/1/"
-        elif category == "top":
+        if (category is None) or (name is None):
             return "https://1337x.to/popular-movies"
 
-    def _set_limit() -> int:
-        """return the limit of results as int"""
+        elif category == "movie":
+            return f"https://1337x.to/category-search/{converted_name}%207/Movies/1/"
 
-        return 27 if limit_results > 27 else limit_results
+        elif category == "serie":
+            return f"https://1337x.to/category-search/{converted_name}%207/TV/1/"
+
+        else:
+            print("invalid category")
+            exit(1)
+
+    # def _set_limit() -> int:
+    #     """return the limit of results as int"""
+    #     limit_results = ask_for_limit()
+    #     return 27 if limit_results > 27 else limit_results
 
     class _Leet(scrapy.Spider):
 
@@ -44,15 +54,19 @@ def leet(name: Optional[str], category: str, limit_results: int):
         url = _set_category()
 
         start_urls = [url]
+        limit = 20
 
         def parse(self, response):
-            limit = _set_limit()
             movies = response.css(MOVIES)
             for idx, movie in enumerate(movies, start=1):
-                if idx <= limit:
-                    page_info = DOMAIN + movie.css("td a:nth-child(2)::attr(href)").get()
+                if idx <= _Leet.limit:
+                    page_info = (
+                        DOMAIN + movie.css("td a:nth-child(2)::attr(href)").get()
+                    )
                     yield response.follow(page_info, callback=self.parse_magnet_link)
-            
+                else:
+                    break
+
         def parse_magnet_link(self, response):
 
             for info in response.css(MOVIE_INFO):
@@ -71,6 +85,7 @@ def leet(name: Optional[str], category: str, limit_results: int):
 
     return _Leet
 
+
 # This is just for testing the spider manually
 if __name__ == "__main__":
     process = CrawlerProcess(
@@ -80,10 +95,10 @@ if __name__ == "__main__":
         }
     )
 
-    spider_class = leet(category="top", name="peaky blinders", limit_results=55)
+    spider_class = leet(category="serie", name="peaky blinders")
     process.crawl(spider_class)
     process.start()
     ouut = spider_class.output
-    
+
     print(ouut)
     print(len(ouut))
