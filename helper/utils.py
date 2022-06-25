@@ -34,12 +34,12 @@ def is_player_valid() -> bool:
             ):
                 return True
         else:
-            print(f"[blod red]{player_name} is not in your path[bold red]")
+            print(f"[bold red]{player_name} is not in your path[bold red]")
             return False
     return True
 
 
-def handle_erros(url: str):
+def handle_errors(url: str):
     clear_screen()
     try:
         requests.get(url)
@@ -49,7 +49,8 @@ def handle_erros(url: str):
 
     except requests.exceptions.HTTPError:
         console.print(
-            "[bold red]The host is probably banned in your country please consider using a VPN or choose another host[bold red]"
+            "[bold red]The host is probably banned in your country please consider using a VPN or choose another "
+            "host[bold red] "
         )
         exit()
 

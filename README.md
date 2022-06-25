@@ -7,7 +7,7 @@
 stream-cli is a Python scrapping CLI that combine [scrapy](https://scrapy.org) and [webtorrent](https://github.com/webtorrent/webtorrent-cli) in one command for streaming movies from your terminal.
 
 ## Installation:
-> stream-cli is written in python and it depends on [webtorrent](https://github.com/webtorrent/webtorrent-cli), [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com)
+> stream-cli is written in python, and it depends on [webtorrent](https://github.com/webtorrent/webtorrent-cli), [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com)
 
 1. install NodeJS on your machine ([read mode](https://nodejs.org/en/download/)).
 ```bash
@@ -33,7 +33,7 @@ git clone https://github.com/redelka00/stream-cli && cd stream-cli
 ![clone results](.github/clone.png)
 
 5. create a virtual environment.
-* Beginner windows users who couldn't setup the [virtualenv] check this doc.
+* Beginner Windows users who couldn't set up the [virtualenv] check this doc.
 * Unix Users
 ```bash
 python3 -m venv venv && source venv/bin/activate
@@ -47,9 +47,9 @@ pip install -r requirements.txt
 ![install packages](.github/pipintsall.png)
 
 ## Usage:
-* First of all you need to setup a default player.
+* First you need to set up a default player.
 > Note that only [vlc](https://www.videolan.org/vlc/) and [mpv](https://mpv.io/) are supported. <br>
-> If you are a windows user make sure that you add your player to the PATH. [read more](https://www.vlchelp.com/add-vlc-command-prompt-windows/)
+> If you are a Windows user make sure that you add your player to the PATH. [read more](https://www.vlchelp.com/add-vlc-command-prompt-windows/)
 ```bash
 python3 main.py config "vlc"
 ```
@@ -58,7 +58,7 @@ python3 main.py config "vlc"
 ```bash
 python3 main.py top
 ```
-* If you want to watch a TVSerie:
+* If you want to watch a TV Series:
 ```bash
 python3 main.py serie
 ```
@@ -68,7 +68,7 @@ python3 main.py search
 What movie are you looking for? red notice
 ```
 ![table of search](.github/table_of_movies.png)
-* To start watching you can just type the number of the movie in the table. 
+* To start watching you can just type the number of the movie in the table.
 
 ## Contributing:
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.

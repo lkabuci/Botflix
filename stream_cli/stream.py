@@ -35,7 +35,7 @@ def get_magnet(magnets: List[str]) -> str:
 
 
 def stream(magnet: str, default_player: str) -> None:
-    """takes a chosen magnet and a deafult player
+    """takes a chosen magnet and a default player
     run the process.
     """
 

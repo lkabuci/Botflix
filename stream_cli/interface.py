@@ -4,8 +4,8 @@ from rich.table import Table
 
 
 def print_table_of_movies(list_of_movies: list):
-    """takes a list of dictionnaries that contain movies data in it
-    is_top_movies_choice: wheather searched for top_movies or custom search
+    """takes a list of dictionaries that contain movies data in it
+    is_top_movies_choice: whether searched for top_movies or custom search
     """
     table = Table(title="🎖🎥 Stream-CLI 🎥🎖", box=box.HEAVY)
 

@@ -10,7 +10,7 @@ setuptools.setup(
     name="stream-cli",
     author="Redouane Elkaboussi",
     author_email="elkaboussi@pm.me",
-    version=0.2,
+    version="v0.2",
     description="stream movies directly from your terminal!",
     long_description=readme,
     packages=requirements,
