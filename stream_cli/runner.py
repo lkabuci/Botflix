@@ -13,7 +13,7 @@ from stream_cli.stream import get_magnet, stream
 
 def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     """takes a spider class as an argument ( TopMoviesSpider or SearchedMoviesSpider )
-    return a list of movies inside a dictionnary
+    return a list of movies inside a dictionary
     """
 
     twisted_error = "twisted.internet.reactor"
@@ -44,7 +44,7 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     return spider_class.output
 
 
-def apprun(scraping_class) -> None:
+def app_run(scraping_class) -> None:
     if not utils.is_player_valid():
         print("[bold red]Setup a default player first[bold red]")
         exit(1)

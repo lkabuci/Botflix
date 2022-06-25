@@ -24,3 +24,6 @@ data/
 # node
 node_modules/
 *.json
+
+# Pycharm
+.idea/

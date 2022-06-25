@@ -1,10 +1,9 @@
-from typing import Optional
+from typing import Dict, List, Optional
 
 import scrapy
 from rich.console import Console
-from scrapy.crawler import CrawlerProcess
 
-from helper.utils import handle_erros
+from helper.utils import handle_errors
 
 MOVIES = "tbody tr"
 MOVIE_INFO = "div.torrent-detail-page"
@@ -20,7 +19,7 @@ PAGE_INFO = "td a:nth-child(2)::attr(href)"
 MAGNET = "div.no-top-radius div.clearfix ul li a::attr(href)"
 
 
-handle_erros("https://www.1337x.to/")
+handle_errors("https://www.1337x.to/")
 console = Console()
 
 
@@ -47,10 +46,10 @@ def leet(category: Optional[str] = None):
 
     class _Leet(scrapy.Spider):
 
-        output = []
-        idx = 1
-        name = "leet"
-        url = _set_category()
+        output: List[Dict] = []
+        idx: int = 1
+        name: str = "leet"
+        url: str = _set_category()
 
         start_urls = [url]
         limit = 20
@@ -62,11 +61,11 @@ def leet(category: Optional[str] = None):
                     page_info = (
                         DOMAIN + movie.css("td a:nth-child(2)::attr(href)").get()
                     )
-                    yield response.follow(page_info, callback=self.parse_magnet_link)
+                    yield response.follow(page_info, callback=self.parse_movie)
                 else:
                     break
 
-        def parse_magnet_link(self, response):
+        def parse_movie(self, response):
 
             for info in response.css(MOVIE_INFO):
                 items = {
