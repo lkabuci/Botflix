@@ -90,7 +90,7 @@ Open a Pull Request.
 
 ## License:
 [MIT](https://mit-license.org/)<br>
-[Copyright](https://www.disclaimertemplate.net/live.php?token=xyytrgo4QtkLMNCB6LEIO6Q39YDFyhu2)
+[DISCLAMER](https://www.disclaimertemplate.net/live.php?token=xyytrgo4QtkLMNCB6LEIO6Q39YDFyhu2)
 
 
 
