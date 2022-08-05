@@ -44,7 +44,7 @@ def start_scrawling(spider_class: Callable[[], Generator]) -> List[dict]:
     return spider_class.output
 
 
-def app_run(scraping_class) -> None:
+def apprun(scraping_class) -> None:
     if not utils.is_player_valid():
         print("[bold red]Setup a default player first[bold red]")
         exit(1)
