@@ -4,7 +4,7 @@ from simple_term_menu import TerminalMenu
 from helper.utils import set_player
 from stream_cli.api.leet import leet
 from stream_cli.api.torrentgalaxy import torrent_galaxy
-from stream_cli.runner import apprun
+from stream_cli.runner import app_run
 
 console = Console()
 
