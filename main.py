@@ -53,7 +53,7 @@ def main():
     )
 
     config_title = " Choose a default player: \n"
-    config_items = ["Back to Main Menu", "VLC", "MPV"]
+    config_items = ["Back to Main Menu", "VLC", "MPV", "SMPLAYER", "MPLAYER"]
     config_back = False
     config = TerminalMenu(
         config_items,
@@ -119,6 +119,12 @@ def main():
                 elif edit_sel == 2:
                     set_player("mpv")
                     config_back = True
+                elif edit_sel == 3:
+                    set_player("smplayer")
+                    config_back = True
+                elif edit_sel == 4:
+                    set_player("mplayer")
+                    config_back = True                                        
             config_back = False
 
         # Quit
