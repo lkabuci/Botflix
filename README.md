@@ -21,7 +21,7 @@ npm --version
 ```
 3. Download the bash script
 ```bash
-wget https://github.com/ashroyxi/stream-cli/raw/main/install.sh
+wget https://github.com/ashroyxi/stream-cli/releases/download/new/install.sh
 ```
 4. Give executable permisssion
 ```bash
