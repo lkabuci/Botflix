@@ -19,17 +19,27 @@ v17.9.0 #or higher
 npm --version
 8.8.0 # or higher
 ```
-3. now install this project
-Download the bash script
-`wget https://github.com/ashroyxi/stream-cli/raw/main/install.sh`
-Give executable permisssion
-`chmod +x install.sh`
-Run the Script
-`./install.sh`
+3. Download the bash script
+```bash
+wget https://github.com/ashroyxi/stream-cli/raw/main/install.sh
+```
+4. Give executable permisssion
+```bash
+chmod +x install.sh
+```
+5. Run the Script
+```
+./install.sh
+```
 
 ## Usage
-run `stream-cli` 
-
+run 
+```
+stream-cli
+``` 
+```diff
+- Don't forget to change your default player from `configuration` . By dafault it is set to `mpv`
+```
 
 ## Contributing:
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
