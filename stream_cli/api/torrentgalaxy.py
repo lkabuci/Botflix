@@ -31,15 +31,35 @@ def torrent_galaxy(category: Optional[str] = None):
             if category == "movie":
                 return (
                     "https://torrentgalaxy.to/torrents.php?c3=1&c46=1&c45=1&c42=1&c4=1&c1=1"
-                    f"&search={converted_name}&sort=seeders&order=desc&lang=0&nox=2&nox=1#results"
+                    f"&search={converted_name}&sort=seeders&order=desc&lang=0&nox=2#results"
                 )
 
             elif category == "serie":
                 return (
-                    f"https://torrentgalaxy.to/torrents.php?c41=1&c5=1&c6=1&search={converted_name}&lang=0&nox=1"
+                    f"https://torrentgalaxy.to/torrents.php?c41=1&c5=1&c6=1&c11=1&search={converted_name}&lang=0&nox=2"
                     "&sort=seeders&order=desc"
                 )
-
+            elif category == "anime":
+                return (
+                    f"https://torrentgalaxy.to/torrents.php?c28=1&search={converted_name}&lang=0&nox=2"
+                    "&sort=seeders&order=desc"
+                )
+            elif category == "music":
+                return (
+                    f"https://torrentgalaxy.to/torrents.php?c22=1&c26=1&c23=1&c25=1&c24=1&search={converted_name}&lang=0&nox=2"
+                    "&sort=seeders&order=desc"
+                )
+            elif category == "audiobook":
+                return (
+                    f"https://torrentgalaxy.to/torrents.php?c13=1&search={converted_name}&lang=0&nox=2"
+                    "&sort=seeders&order=desc"
+                )
+            elif category == "porn":
+                return (
+                    f"https://torrentgalaxy.to/torrents.php?c35=1&c34=1&search={converted_name}&lang=0&nox=2"
+                    "&sort=seeders&order=desc"
+                )
+                
     class _TorrentGalaxy(scrapy.Spider):
 
         output = []

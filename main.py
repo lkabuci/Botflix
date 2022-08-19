@@ -15,27 +15,49 @@ def get_top(choice):
         2: apprun(leet()),
     }
     return choices[choice]
-
-
 def get_movie(choice):
     choices = {
         1: apprun(torrent_galaxy("movie")),
         2: apprun(leet("movie")),
     }
     return choices[choice]
-
-
 def get_serie(choice):
-    choices = {1: apprun(torrent_galaxy("serie")), 2: apprun(leet("serie"))}
+    choices = {
+        1: apprun(torrent_galaxy("serie")), 
+        2: apprun(leet("serie"))
+    }
     return choices[choice]
-
-
+def get_anime(choice):
+    choices = {
+        1: apprun(torrent_galaxy("anime")),
+    }
+    return choices[choice]
+def get_music(choice):
+    choices = {
+        1: apprun(torrent_galaxy("music")),
+    }
+    return choices[choice]
+def get_audiobook(choice):
+    choices = {
+        1: apprun(torrent_galaxy("audiobook")),
+    }
+    return choices[choice]
+def get_porn(choice):
+    choices = {
+        1: apprun(torrent_galaxy("porn")),
+    }
+    return choices[choice]
+    
 def main():
     main_menu_title = " Stream-CLI\n"
     main_menu_items = [
         "Top movies",
         "Search for a movie",
         "Search for a TvSerie",
+        "Search for a Anime",
+        "Search for a Music",
+        "Search for a AudioBook",
+        "Search for a Porn",
         "Configuration",
         "Quit",
     ]
@@ -107,8 +129,49 @@ def main():
                     get_serie(hosts)
             host_back = False
 
-        # Configuration
+        # Search By Anime
         elif main_sel == 3:
+            while not host_back:
+                hosts = choose_host.show()
+                if hosts == 0:
+                    host_back = True
+                else:
+                    get_anime(hosts)
+            host_back = False
+
+        # Search By Music
+        elif main_sel == 4:
+            while not host_back:
+                hosts = choose_host.show()
+                if hosts == 0:
+                    host_back = True
+                else:
+                    get_music(hosts)
+            host_back = False
+
+        # Search By AudioBook
+        elif main_sel == 5:
+            while not host_back:
+                hosts = choose_host.show()
+                if hosts == 0:
+                    host_back = True
+                else:
+                    get_audiobook(hosts)
+            host_back = False
+
+        # Search By Porn
+        elif main_sel == 6:
+            while not host_back:
+                hosts = choose_host.show()
+                if hosts == 0:
+                    host_back = True
+                else:
+                    get_porn(hosts)
+            host_back = False
+
+
+        # Configuration
+        elif main_sel == 7:
             while not config_back:
                 edit_sel = config.show()
                 if edit_sel == 0:
@@ -128,7 +191,7 @@ def main():
             config_back = False
 
         # Quit
-        elif main_sel == 4:
+        elif main_sel == 8:
             main_menu_exit = True
 
 
