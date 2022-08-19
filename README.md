@@ -19,56 +19,17 @@ v17.9.0 #or higher
 npm --version
 8.8.0 # or higher
 ```
-3. now let's install webtorrent ([read more](https://github.com/webtorrent/webtorrent-cli)).
-```bash
-npm install webtorrent-cli -g
-webtorrent --version # 4.0.4 (1.8.16)
-```
-_Note: if not installed try with sudo privileges._
+3. now install this project
+Download the bash script
+`wget https://github.com/ashroyxi/stream-cli/raw/main/install.sh`
+Give executable permisssion
+`chmod +x install.sh`
+Run the Script
+`./install.sh`
 
-4. clone the repo in your local machine.
-```bash
-git clone https://github.com/redelka00/stream-cli && cd stream-cli
-```
-![clone results](.github/clone.png)
+## Usage
+run `stream-cli` 
 
-5. create a virtual environment.
-* Beginner Windows users who couldn't set up the [virtualenv] check this doc.
-* Unix Users
-```bash
-python3 -m venv venv && source venv/bin/activate
-```
-![creating virtualenv](.github/virtualenv.png)
-
-6. Install necessary packages.
-```bash
-pip install -r requirements.txt
-```
-![install packages](.github/pipintsall.png)
-
-## Usage:
-* First you need to set up a default player.
-> Note that only [vlc](https://www.videolan.org/vlc/) and [mpv](https://mpv.io/) are supported. <br>
-> If you are a Windows user make sure that you add your player to the PATH. [read more](https://www.vlchelp.com/add-vlc-command-prompt-windows/)
-```bash
-python3 main.py config "vlc"
-```
-![config](.github/config.png)
-* If you want to get top movies:
-```bash
-python3 main.py top
-```
-* If you want to watch a TV Series:
-```bash
-python3 main.py serie
-```
-* If you want to search for a specific movie (_"[red notice](https://www.imdb.com/title/tt7991608/)"_ for example):
-```bash
-python3 main.py search
-What movie are you looking for? red notice
-```
-![table of search](.github/table_of_movies.png)
-* To start watching you can just type the number of the movie in the table.
 
 ## Contributing:
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
