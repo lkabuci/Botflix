@@ -1,6 +1,6 @@
 #!/bin/bash
 
-meeting requirements
+#meeting requirements
 echo "$(tput setaf 4)Installing Requirements"
 npm install webtorrent-cli -g
 git clone https://github.com/redelka00/stream-cli && cd stream-cli
