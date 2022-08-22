@@ -3,7 +3,7 @@
 #meeting requirements
 echo "$(tput setaf 4)Installing Requirements"
 sudo npm install webtorrent-cli -g
-git clone https://github.com/redelka00/stream-cli && cd stream-cli
+git clone https://github.com/ashroyxi/stream-cli && cd stream-cli
 python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 
