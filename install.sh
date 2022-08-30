@@ -1,3 +1,8 @@
+# TODO:
+# Add instructions installation script that include windows
+# More flexible (ask the user about the default player for example)
+# Add it to aur
+
 READ='\e[31m%s\e[0m'
 GREEN='\e[32m%s\e[0m'
 YELLOW='\e[33m%s\e[0m'
