@@ -38,7 +38,11 @@ git clone https://github.com/redelka00/stream-cli && cd stream-cli
 ```bash
 python3 -m venv venv && source venv/bin/activate
 ```
-![creating virtualenv](.github/virtualenv.png)
+![creating virtualenv](.github/virtualenv.png)  
+**Note**: on Debian/Ubuntu systems you will first need to install venv using 
+```bash
+sudo apt install python3-venv
+```
 
 6. Install necessary packages.
 ```bash
