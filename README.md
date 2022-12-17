@@ -2,12 +2,12 @@
   <img src=".github/logo.gif" />
 </p>
 
-<h2 align='center'> Stream-Cli </h2>
+<h2 align='center'> Botflix </h2>
 
-stream-cli is a Python scrapping CLI that combine [scrapy](https://scrapy.org) and [webtorrent](https://github.com/webtorrent/webtorrent-cli) in one command for streaming movies from your terminal.
+Botflix is a Python scrapping CLI that combine [scrapy](https://scrapy.org) and [webtorrent](https://github.com/webtorrent/webtorrent-cli) in one command for streaming movies from your terminal.
 
 ## Installation:
-> stream-cli is written in python, and it depends on [webtorrent](https://github.com/webtorrent/webtorrent-cli), [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com)
+> Botflix is written in python, and it depends on [webtorrent](https://github.com/webtorrent/webtorrent-cli), [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com)
 
 1. install NodeJS on your machine ([read mode](https://nodejs.org/en/download/)).
 ```bash
@@ -28,7 +28,7 @@ _Note: if not installed try with sudo privileges._
 
 4. clone the repo in your local machine.
 ```bash
-git clone https://github.com/redelka00/stream-cli && cd stream-cli
+    git clone https://github.com/kaboussi/Botflix && cd stream_cli
 ```
 ![clone results](.github/clone.png)
 
@@ -71,7 +71,7 @@ python3 main.py serie
 python3 main.py search
 What movie are you looking for? red notice
 ```
-![table of search](.github/table_of_movies.png)
+![table of search](.github/table_of_movies.png "table of search")
 * To start watching you can just type the number of the movie in the table.
 
 ## Contributing:
@@ -87,8 +87,8 @@ Open a Pull Request.
 
 ## Contributors❤:
 <div align="center">
-	<a href="https://github.com/kaboussi/stream-cli/graphs/contributors">
-  	<img src="https://contrib.rocks/image?repo=kaboussi/stream-cli" />
+	<a href="https://github.com/kaboussi/Botflix/graphs/contributors">
+  	<img src="https://contrib.rocks/image?repo=kaboussi/Botflix" />
 	</a>
 </div>
 
@@ -99,4 +99,4 @@ Open a Pull Request.
 
 
 <!-- Links -->
-[virtualenv]: https://github.com/redelka00/stream-cli/blob/main/docs/windowsVenv.md
+[virtualenv]: https://github.com/kaboussi/Botflix/blob/main/docs/windowsVenv.md
