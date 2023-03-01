@@ -28,7 +28,7 @@ _Note: if not installed try with sudo privileges._
 
 4. clone the repo in your local machine.
 ```bash
-    git clone https://github.com/kaboussi/Botflix && cd stream_cli
+    git clone https://github.com/kaboussi/Botflix && cd Botflix
 ```
 ![clone results](.github/clone.png)
 
