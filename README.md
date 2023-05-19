@@ -20,6 +20,11 @@ You can install it manually from [AUR repository](https://aur.archlinux.org/pack
 ```bash
 yay -Syu botflix-git
 ```
+To run
+```bash
+botflix
+```
+Don't forget to set configuration first.
 #### For others
 > Botflix is written in python, and it depends on [webtorrent](https://github.com/webtorrent/webtorrent-cli), [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com)
 
