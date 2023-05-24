@@ -4,9 +4,28 @@
 
 <h2 align='center'> Botflix </h2>
 
+<div align='center'>
+<a href="https://aur.archlinux.org/packages/botflix-git">
+	
+![AUR version](https://img.shields.io/aur/version/botflix-git)
+
+</a>
+</div>
+
 Botflix is a Python scrapping CLI that combine [scrapy](https://scrapy.org) and [webtorrent](https://github.com/webtorrent/webtorrent-cli) in one command for streaming movies from your terminal.
 
 ## Installation:
+#### For ArchLinux or Arch-based distro:
+You can install it manually from [AUR repository](https://aur.archlinux.org/packages/botflix-git) or use a aur helper like `yay` or `paru`.
+```bash
+yay -Syu botflix-git
+```
+To run
+```bash
+botflix
+```
+Don't forget to set configuration first.
+#### For others
 > Botflix is written in python, and it depends on [webtorrent](https://github.com/webtorrent/webtorrent-cli), [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com)
 
 1. install NodeJS on your machine ([read mode](https://nodejs.org/en/download/)).
