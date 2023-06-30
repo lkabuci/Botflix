@@ -6,3 +6,5 @@ pre-commit==2.19.0
 rich==12.4.4
 Scrapy==2.6.1
 simple_term_menu==1.4.1
+httpx
+beautifulsoup4
