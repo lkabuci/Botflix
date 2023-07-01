@@ -6,53 +6,6 @@ import httpx
 base_url = "https://rargb.to"
 
 
-<<<<<<< HEAD
-=======
-# r = httpx.get(base_url, timeout=60)
-# soup = BeautifulSoup(r, "html.parser")
-#
-
-async def parse_movie(movie):
-    title_and_link = movie.find('a', href=lambda href: href and href.startswith('/torrent/'))
-    link = base_url + title_and_link['href']
-    async with httpx.AsyncClient() as client:
-        response = await client.get(link)
-        subsoup = BeautifulSoup(response.content, "html.parser")
-        magnet = subsoup.find('a', href=lambda href: href and href.startswith("magnet:"))
-
-    movie_data = {
-        "title": title_and_link.string,
-        "magnet": magnet['href']
-    }
-
-    return movie_data
-
-
-async def parse_movies(movie_name):
-    params = {"search": movie_name, "order": "seeders", "by": "DESC"}
-    url = base_url + "/search/"
-    async with httpx.AsyncClient as client:
-        response = await client.get(url, params=params)
-        soup = BeautifulSoup(response.text, "html.parser")
-        movies = soup.find_all('tr', class_="lista2")
-
-        tasks = list()
-        for movie in movies:
-            task = asyncio.create_task(parse_movie(movie))
-            tasks.append(task)
-
-        return await asyncio.gather(*tasks)
-
-
-async def main():
-    movie_name = "red notice"
-    rargb_movies = await parse_movies(movie_name)
-
-    for movie in rargb_movies:
-        print(movie)
-
-
->>>>>>> newApi
 def get_magnet(link) -> str:
     subr = httpx.get(link, timeout=60)
     subs = BeautifulSoup(subr.text, 'html.parser')
@@ -82,8 +35,3 @@ for movie in movies:
         "seeders/leechers": get_seeders_leechers(all_components),
         "size": all_components[4].string
     }
-    print(movie_data)
-<<<<<<< HEAD
-
-=======
->>>>>>> newApi
