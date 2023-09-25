@@ -24,7 +24,7 @@ To run
 ```bash
 botflix
 ```
-Don't forget to set configuration first.
+`botflix` is the replacement for the command prefix `python3 main.py` in this readme. for example `python3 main.py config "vlc"` will be `botflix config "vlc"`, which is the final step after installation.
 #### For others
 > Botflix is written in python, and it depends on [webtorrent](https://github.com/webtorrent/webtorrent-cli), [NodeJS](https://nodejs.org) and [npm](https://www.npmjs.com)
 
