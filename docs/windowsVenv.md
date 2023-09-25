@@ -16,7 +16,7 @@
 4. create venv `virtualenv venv`.
 5. Activate virtualenv `.\venv\Scripts\activate.bat`
 
-Once you setup the vitual environment succesfully go back to the [README]
+Once you setup the virtual environment successfully go back to the [README]
 
 
 <!-- Links -->
