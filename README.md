@@ -1,5 +1,6 @@
 <p align="center">
-  <img src=".github/logo.gif" />
+
+  <img src="https://github.com/kaboussi/Botflix/assets/65725801/a0f2db38-fe3c-48af-b63c-30b6aabcd288" />
 </p>
 
 <h2 align='center'> Botflix </h2>
